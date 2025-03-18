@@ -23,6 +23,44 @@ logger.info("Starting Simulation.py Script")
 
 # Simulate Lap
 
+def accelerate_meters(track_length:int, car):
+    
+    
+    
+    while car.position[0] < track_length:
+        car.current_time += car.timestep
+
+        car.
+
+
+
+
+
+def initial_simulation_loop():
+        continue_iterating = False
+        while continue_iterating:
+            ev.current_time += ev.timestep
+            # First, lets calculate all the forces for this given iteration
+            
+            # Calculate Vertical Load 
+            # Get all current parameters of:
+                # 
+
+            # Next, lets figure out what we want the car to do for the next timestep
+            pass # This is based on the velocity profile calculated for the track based on tire and weight transfer parameters
+
+
+            # Next lets figure out what forces we would need to apply to get the car to do the previous
+            pass # Basically, given that we have a theoretical maximum velocity profile, we can use that as a basis for
+                # determining what we should do for each timestep (not based on timestep btw, but on the distance along the track)
+            
+            # We will be using the accelerate tires method for this. For now, there is not consideration of lateral forces. 
+
+            ev.accelerate_tires(acceleration_proportion=1)
+            import pdb; pdb.set_trace()
+            # Next, we should apply the forces to the car. 
+            pass # This involves calculating the resultant vector that we get based on all the forces on the car
+
 
 
 

@@ -46,9 +46,13 @@ def setup_logger(log_name=None, log_dir='logs'):
     # Console handler
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.INFO)  # Show INFO and above in console
+
     console_format = logging.Formatter(
-        '%(asctime)s | %(levelname)-8s | %(message)s'
+        '%(asctime)s | %(levelname)-8s | %(module)s | %(message)s'
     )
+    # console_format = logging.Formatter(
+    #     '%(asctime)s | %(levelname)-8s | %(message)s'
+    # )
     console_handler.setFormatter(console_format)
     
     # Add handlers to logger

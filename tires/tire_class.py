@@ -1,9 +1,13 @@
 # enhanced_tire.py
 import numpy as np
-from magic_formula_tire import MagicFormulaTire
+import pandas as pd
+from tires.magic_formula_tire import MagicFormulaTire
+from helper_functions import TimeSeriesStorage
 
-class EnhancedTire:
-    def __init__(self, magic_formula_tire, position, radius, inertia, smoothing_factor=0.2):
+        
+
+class PhysicalTire:
+    def __init__(self, magic_formula_tire, position, radius, inertia, smoothing_factor=0.2, force_point_parent=None):
         """
         Enhanced tire model with force allocation and smoothing capabilities.
         
@@ -19,7 +23,19 @@ class EnhancedTire:
         self.radius = radius
         self.inertia = inertia
         self.smoothing_factor = smoothing_factor
-        
+
+
+        if force_point_parent is not None:
+            if hasattr(force_point_parent, '__class__'):
+                if (force_point_parent.__class__.__module__ == 'car' and 
+                    force_point_parent.__class__.__name__ == 'force_point'):
+                    self.force_point_parent = force_point_parent
+                else:
+                    self.force_point_parent = False
+            else:
+                self.force_point_parent = False
+        else:
+            self.force_point_parent = False
         # Initialize state dictionary
         self.state = {
             'angular_velocity': 0.0,
@@ -36,6 +52,24 @@ class EnhancedTire:
             'previous_Fx': 0.0,   # Previous longitudinal force (for smoothing)
             'previous_Fy': 0.0    # Previous lateral force (for smoothing)
         }
+        
+        # Initialize TimeSeriesStorage for historical data
+        initial_data = {
+            "time": [0.0],
+            "Fx": [0.0],
+            "Fy": [0.0],
+            "Fz": [0.0],
+            "Mz": [0.0],
+            "max_Fx": [0.0],
+            "desired_Fx": [0.0],
+            "desired_Fy": [0.0],
+            "slip_ratio": [0.0],
+            "slip_angle": [0.0],
+            "angular_velocity": [0.0],
+            "Vx": [0.0],
+            "longitudinal_mode": ["maintain"]
+        }
+        self.history = TimeSeriesStorage(initial_data, force_point_parent.name)
         
         # Check if lookup table has been generated
         if not self.mf_tire.lookup_table_generated:
@@ -61,7 +95,7 @@ class EnhancedTire:
         alpha = min(1.0, self.smoothing_factor / dt)  # Scale by dt for time-consistent behavior
         return previous_force + alpha * (desired_force - previous_force)
     
-    def allocate_forces(self, Fy_desired, Fz, Vx, longitudinal_mode, target_speed=None, current_speed=None, speed_buffer=1.0, dt=0.01):
+    def allocate_forces(self, Fy_desired, Fz, Vx, longitudinal_mode, time, target_speed=None, current_speed=None, speed_buffer=1.0, dt=0.01, acceleration_proportion=None):
         """
         Allocate forces based on desired lateral force, velocity profile, and tire limits.
         
@@ -70,6 +104,7 @@ class EnhancedTire:
             Fz: Vertical load (N)
             Vx: Longitudinal velocity (m/s)
             longitudinal_mode: One of "accelerate", "brake", "maintain", or "match_speed"
+            time: Current simulation time (for history tracking)
             target_speed: Target speed from velocity profile (m/s), required if mode is "match_speed"
             current_speed: Current vehicle speed (m/s), required if mode is "match_speed"
             speed_buffer: Allowed deviation from target speed (m/s)
@@ -93,9 +128,14 @@ class EnhancedTire:
                 point = np.array([[0.0, smoothed_Fy]])  # Assume no longitudinal force for initial estimate
                 estimated_slip_angle = float(self.mf_tire.alpha_interp(point)[0])
             except Exception as e:
-                print(f"Warning: Error in slip angle interpolation: {e}")
+                logger.warning(f"Warning: Error in slip angle interpolation: {e}")
         
         # Calculate maximum available longitudinal force
+        try:
+            Fz/2
+        except Exception as e:
+            print(e)
+            import pdb; pdb.set_trace()
         max_fx_info = self.mf_tire.calculate_max_longitudinal_force(
             Fz, estimated_slip_angle)
         self.state['max_Fx'] = max_fx_info['max_fx']
@@ -106,6 +146,7 @@ class EnhancedTire:
         if longitudinal_mode == "accelerate":
             # Use maximum available acceleration
             Fx_desired = self.state['max_Fx']
+            Fx_requested = None if acceleration_proportion is None else self.state['max_Fx']*acceleration_proportion
         elif longitudinal_mode == "brake":
             # Use maximum available braking (negative force)
             Fx_desired = -self.state['max_Fx']
@@ -142,12 +183,38 @@ class EnhancedTire:
             smoothed_Fx = np.sign(smoothed_Fx) * abs(self.state['max_Fx'])
             
         # Update the tire with the allocated forces
-        self.update(smoothed_Fx, smoothed_Fy, Fz, Vx, dt)
+        self.update(smoothed_Fx, smoothed_Fy, Fz, Vx, dt, time)
         
         # Store current forces as previous for next iteration
         self.state['previous_Fx'] = self.state['Fx']
         self.state['previous_Fy'] = self.state['Fy']
         
+        # Store data in history
+        history_data = {
+            "Fx": self.state['Fx'],
+            "Fy": self.state['Fy'],
+            "Fz": Fz,
+            "Mz": self.state['Mz'],
+            "max_Fx": self.state['max_Fx'],
+            "desired_Fx": self.state['desired_Fx'],
+            "desired_Fy": self.state['desired_Fy'],
+            "slip_ratio": self.state['slip_ratio'],
+            "slip_angle": self.state['slip_angle'],
+            "angular_velocity": self.state['angular_velocity'],
+            "Vx": Vx,
+            "longitudinal_mode": longitudinal_mode
+        }
+        
+        if longitudinal_mode == "match_speed":
+            history_data["target_speed"] = target_speed
+            history_data["current_speed"] = current_speed
+        
+        self.history.update(history_data, time)
+        
+        if self.force_point_parent:
+            update_forces = {"x_friction": self.state['Fx'],    "y_friction": self.state['Fy']}
+            self.force_point_parent.forces.update(update_forces, time)
+
         # Return the allocated forces and slip values
         return {
             'Fx': self.state['Fx'],
@@ -157,7 +224,7 @@ class EnhancedTire:
             'slip_angle': self.state['slip_angle']
         }
     
-    def update(self, Fx_desired, Fy_desired, Fz, Vx, dt):
+    def update(self, Fx_desired, Fy_desired, Fz, Vx, dt, time=None):
         """
         Update the tire state based on desired forces and conditions.
         
@@ -167,6 +234,7 @@ class EnhancedTire:
             Fz: Vertical load (N)
             Vx: Longitudinal velocity (m/s)
             dt: Time step (s)
+            time: Current simulation time (for history tracking)
         """
         # Update state variables
         self.state['Fz'] = Fz
@@ -189,7 +257,7 @@ class EnhancedTire:
                 self.state['slip_ratio'] = kappa
                 self.state['slip_angle'] = alpha
             except Exception as e:
-                print(f"Warning: Error in slip interpolation: {e}")
+                logger.warning(f"Warning: Error in slip interpolation: {e}")
                 # Fall back to direct calculation
                 direct_forces = self.mf_tire.calculate_steady_state_forces(Fz, self.state['slip_ratio'], self.state['slip_angle'])
                 self.state['Fx'] = direct_forces['Fx']
@@ -211,7 +279,24 @@ class EnhancedTire:
         angular_acceleration = wheel_torque / self.inertia
         
         # Update angular velocity (ω = ω₀ + α * dt)
-        self.state['angular_velocity'] += angular_acceleration * dt    
+        self.state['angular_velocity'] += angular_acceleration * dt
+        
+        # If time is provided, update history
+        if time is not None and not self.history.get_value("Fx", time):
+            history_data = {
+                "Fx": self.state['Fx'],
+                "Fy": self.state['Fy'],
+                "Fz": Fz,
+                "Mz": self.state['Mz'],
+                "max_Fx": self.state['max_Fx'],
+                "desired_Fx": Fx_desired,
+                "desired_Fy": Fy_desired,
+                "slip_ratio": self.state['slip_ratio'],
+                "slip_angle": self.state['slip_angle'],
+                "angular_velocity": self.state['angular_velocity'],
+                "Vx": Vx
+            }
+            self.history.update(history_data, time)
 
     def get_forces(self):
         """
@@ -252,58 +337,41 @@ class EnhancedTire:
             'angular_velocity': self.state['angular_velocity'],
             'radius': self.radius
         }
-
-# velocity_profile.py
-import numpy as np
-
-class VelocityProfile:
-    """
-    Class to represent a velocity profile for a track.
-    The actual implementation will be added later.
-    """
-    def __init__(self, track_data=None):
-        """
-        Initialize the velocity profile.
         
-        Args:
-            track_data: Data describing the track (will be implemented later)
+    def get_history(self):
         """
-        self.track_data = track_data
-        self.profile = None  # Will hold the velocity profile data
-    
-    def get_target_speed(self, position, direction=None):
-        """
-        Get the target speed at a specific position on the track.
+        Get the historical data as a DataFrame.
         
-        Args:
-            position: Position along the track (m) or (x, y) coordinates
-            direction: Optional direction vector for the car
-            
         Returns:
-            Target speed (m/s)
+            DataFrame containing all historical tire data
         """
-        # This is a placeholder implementation
-        # Will be replaced with actual calculation based on track curvature and tire grip
-        if self.profile is not None:
-            # If we have a profile, do a simple lookup or interpolation
-            return self.profile.get(position, 30.0)  # Default to 30 m/s if not found
-        else:
-            # Return a default value for now
-            return 30.0
+        return self.history.get_dataframe()
     
-    def calculate_profile(self, vehicle_params, tire_model):
+    def plot_history(self, columns=None):
         """
-        Calculate the velocity profile for the track based on vehicle parameters and tire model.
-        This method will be implemented later.
+        Plot selected columns from the historical data.
         
         Args:
-            vehicle_params: Vehicle parameters (mass, dimensions, etc.)
-            tire_model: Tire model to use for grip calculations
-            
-        Returns:
-            None (updates self.profile)
+            columns: List of column names to plot, if None plots standard set
         """
-        # Placeholder implementation
-        self.profile = {}  # Will be a mapping from position to speed
-        print("Velocity profile calculation will be implemented later.")
+        import matplotlib.pyplot as plt
+        
+        if columns is None:
+            columns = ["Fx", "Fy", "max_Fx", "slip_ratio", "slip_angle"]
+        
+        df = self.history.get_dataframe()
+        
+        plt.figure(figsize=(12, 8))
+        for i, col in enumerate(columns):
+            if col in df.columns:
+                plt.subplot(len(columns), 1, i+1)
+                plt.plot(df.index, df[col])
+                plt.ylabel(col)
+                plt.grid(True)
+                
+                if i == len(columns) - 1:
+                    plt.xlabel("Time (s)")
+        
+        plt.tight_layout()
+        plt.show()
 

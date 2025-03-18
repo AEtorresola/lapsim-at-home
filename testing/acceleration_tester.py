@@ -1,22 +1,8 @@
 from car_tester import ev
 from motor_tester import emrax_208
+from logger import setup_logger
+import pandas as pd
 
-#
-# def accelerate(track_length):
-#
-#     position = 0
-#
-#     while position < track_length:
-#         pass
-#
-#
-# if __name__ == "__main__":
-#     accelerate(75)
-#
-
-import numpy as np
-from car import *
-from forces import *
 
 # Example usage
 logger = setup_logger()
@@ -34,9 +20,77 @@ logger.info("Starting Acceleration.py Script")
 # except Exception as e:
 #     logger.exception("An error occurred")
 #
+
+
+
+
 ## Maximum Grip Tire model
 
 # Simulate Lap
+
+
+def accelerate_straightline(length, car=ev):
+    
+    while ev.position[0] < 75:
+    # Basic logic is as follows:
+        # For each timestep, attempt to allocate the maximum amount of acceleration
+
+        ev.get_vertical_load(ev.current_time)
+
+        ev.accelerate_tires(acceleration_proportion=1, longitudinal_mode='accelerate')
+        import pdb; pdb.set_trace()
+        ev.calculate_timestep(ev.current_time)
+        
+        print(ev.current_time)
+        ev.current_time = round(ev.timestep+ev.current_time, 2)
+        print(ev.current_time)
+
+
+
+if __name__ == "__main__":
+    accelerate_straightline(75)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def compute_acceleration_timestep(
     cornering_force: float,     # 0 to 1, ratio of how much goes to cornering
@@ -66,32 +120,6 @@ def compute_acceleration_timestep(
             #2-1 < 0.5 ; 1<0.5 not true 
     else: 
         logger.warning(f"This is only meant to simulate acceleration, yet cornering fraction of {cornering_force} provided")
-      pass
-
-
-def compute_longitudinal_acceleration(
-    accelerate: bool,         # True = accelerate, False = Brake
-    tire_state: dict
-):
-
-    
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        pass
+ #
+       

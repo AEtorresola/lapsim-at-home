@@ -5,6 +5,17 @@ import matplotlib.pyplot as plt
 import math
 from scipy.interpolate import RegularGridInterpolator
 from scipy.optimize import fsolve
+from logger import setup_logger
+        
+# Example usage
+logger = setup_logger()
+
+# # Now you can use logger throughout your script:
+# logger.debug("Detailed debug information (file only)")
+logger.info("Starting Car.py Script")
+# logger.warning("Warning message (file and console)")
+# logger.error("Error message (file and console)")
+# logger.critical("Critical failure (file and console)")
 
 class MagicFormulaTire:
     def __init__(self, tire_name, tire_file_path=None):
@@ -14,7 +25,7 @@ class MagicFormulaTire:
             # Tire dimensions
             'R_0': 0.330,  # unloaded tire radius [m]
             'R_e': 0.315,  # effective rolling radius [m]
-            'F_z0': 4500,  # nominal load [N]
+            'F_z0': 670,  # nominal load [N]
             'V_0': 30.0,   # reference velocity [m/s] (higher for race applications)
             
             # Tire stiffnesses
@@ -88,9 +99,9 @@ class MagicFormulaTire:
                     if key in self.params:
                         self.params[key] = value
                         
-            print(f"Loaded tire properties from {file_path}")
+            logger.info(f"Loaded tire properties from {file_path}")
         except Exception as e:
-            print(f"Error loading tire properties: {e}")
+            logger.error(f"Error loading tire properties: {e}")
             
     def calculate_steady_state_forces(self, Fz, kappa, alpha, gamma=0, Vx=30, temp=None):
         """
@@ -115,11 +126,12 @@ class MagicFormulaTire:
         temp_effect = 1.0 - self.params['grip_temp_factor'] * (
             (temp - self.params['temp_opt'])**2 / (self.params['temp_range']**2))
         temp_effect = max(0.5, min(1.0, temp_effect))  # Limit reduction
-        
+       
         # Normalized vertical load
         Fz0 = self.params['F_z0']
+
         dfz = (Fz - Fz0) / Fz0
-        
+
         # Pure longitudinal slip - calculate longitudinal force
         Fx0 = self._calculate_Fx0(kappa, Fz, dfz, temp_effect)
         
@@ -277,8 +289,9 @@ class MagicFormulaTire:
 
         # Calculate normalized vertical load
         Fz0 = self.params['F_z0']
+
         dfz = (Fz - Fz0) / Fz0
-        
+
         # Calculate temperature effect if needed
         temp_effect = 1.0
         if hasattr(self, 'params') and 'temp_opt' in self.params:
@@ -336,8 +349,9 @@ class MagicFormulaTire:
 
         # Calculate normalized vertical load
         Fz0 = self.params['F_z0']
+            
         dfz = (Fz - Fz0) / Fz0
-        
+
         # Calculate temperature effect
         temp_effect = 1.0
         if hasattr(self, 'params') and 'temp_opt' in self.params:
@@ -408,6 +422,10 @@ class MagicFormulaTire:
                     alpha_values[i, j, k] = alpha
                     
                     # Calculate max available Fx
+                    Fz0 = self.params['F_z0']
+
+                    dfz = (Fz - Fz0) / Fz0
+
                     max_Fx_info = self.calculate_max_longitudinal_force(Fz, alpha, gamma, temp)
                     max_Fx_values[i, j, k] = max_Fx_info['max_fx']
         
@@ -440,7 +458,7 @@ class MagicFormulaTire:
         )
         
         self.lookup_table_generated = True
-        print("Generated force to slip lookup table.")       
+        logger.info("Generated force to slip lookup table.")       
 
     def _find_slip_from_forces(self, Fx_desired, Fy_desired, Fz, 
                               max_iterations=50):
