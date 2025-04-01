@@ -22,8 +22,8 @@ class TimeSeriesStorage:
         self.name = name
         self.data = pd.DataFrame(initial_data)
 
-        # Ensure 'time' column is of type float and set it as the index
-        self.data['time'] = self.data['time'].astype(float)
+        # Ensure 'time' column is of type int and set it as the index
+        self.data['time'] = self.data['time'].astype(int)
         self.data.set_index("time", inplace=True)
 
         # Apply column dtypes if col_types is provided
@@ -34,12 +34,12 @@ class TimeSeriesStorage:
                 else:
                     raise ValueError(f"Column '{col}' specified in col_types does not exist in the DataFrame.")
 
-    def update(self, new_data: dict, time: float):
+    def update(self, new_data: dict, time: int):
         """
         Update the time-series data at a specific time.
 
         Args:
-            time (float): The time at which to update the data.
+            time (int): The time at which to update the data.
             new_data (dict): A dictionary where keys are column names and values are the new values to be updated.
 
         Raises:
@@ -77,12 +77,12 @@ class TimeSeriesStorage:
             # Re-raise the exception if you want the caller to handle it
             raise
 
-    def get_value(self, column: str, time: float):
+    def get_value(self, column: str, time: int):
         """
         Retrieve a specific value from the time-series data.
 
         Args:
-            time (float): The time at which to retrieve the value.
+            time (int): The time at which to retrieve the value.
             column (str): The column name from which to retrieve the value.
 
         Returns:
@@ -94,7 +94,7 @@ class TimeSeriesStorage:
             logger.warning(f"Error: Time index '{time}' or column '{column}' not found.")
             return None
 
-    def get_time_series(self, time: float):
+    def get_time_series(self, time: int):
         """
         Retrieve a specific row as a Pandas Series.
 
@@ -155,9 +155,11 @@ def combine_dataframes(
     # import pdb; pdb.set_trace()
     # for df, _ in list_of_named_dfs:
     #     if time_index not in df.columns:
+    # import pdb; pdb.set_trace()
+    #
     #         df[time_index] = range(len(df))  # Create a new index column
     #     df.set_index(time_index, inplace=True)
-    #
+
     # Rename columns to include dataframe name
     renamed_dfs = []
     for df, name in list_of_named_dfs:
@@ -168,15 +170,16 @@ def combine_dataframes(
     # Concatenate all dataframes
     combined_df = pd.concat(renamed_dfs, axis=1)
 
+
     # Reset index
-    combined_df.reset_index(inplace=True)
+    # combined_df.reset_index(inplace=True)
 
     return combined_df
 
 def append_new_rows(
     combined_df: pd.DataFrame,
     new_rows: list[tuple[pd.Series, str]],
-    time_index: str = "time",
+    time: int,
 ) -> pd.DataFrame:
     """Appends new rows to the combined DataFrame efficiently.
 
@@ -192,24 +195,32 @@ def append_new_rows(
         The updated combined DataFrame with the new rows appended.
     """
 
-    new_row_data = {}
+    new_row_data = {"time":time}
     time_value = None  # Store the time value from the first new row
 
     # Extract data from new rows and store in a dictionary
+
+    # import pdb; pdb.set_trace()
     for row, name in new_rows:
         if time_value is None:
-            time_value = row.get(time_index)  # Get time value from first row
+            time_value = row.index  # Get time value from first row
         for col, value in row.items():
             new_row_data[f"{name}_{col}"] = value
 
     # Add the time index to the new row data
-    new_row_data[time_index] = time_value
+    # new_row_data[time_index] = time_value
 
     # Create a new DataFrame from the collected data
-    new_row_df = pd.DataFrame([new_row_data])
+    if False:
+        new_row_df = pd.DataFrame([new_row_data], index=[time])
+        new_row_df.index.name = 'time'
+        # Append the new row to the combined DataFrame
+        combined_df = pd.concat([combined_df, new_row_df], ignore_index=False)
+    
+    # Series Method
+    new_row_series = pd.Series(new_row_data, name=time)
 
-    # Append the new row to the combined DataFrame
-    combined_df = pd.concat([combined_df, new_row_df], ignore_index=True)
+    combined_df.loc[time] = new_row_series
 
     return combined_df
 

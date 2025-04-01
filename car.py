@@ -49,8 +49,8 @@ class Car:
         # Physical Parameters
         self.z_inertia = 1/12*self.mass*(self.wheelbase**2+self.track_width**2)
         # Program Parameters 
-        self.force_lag = 0.05
-        self.timestep = 0.05
+        self.force_lag = 5          # Changing to millisecond based time series. 
+        self.timestep = 5           # Changing to millisecond based time series. 
         self.current_time= 0
 
         # self.all_forces = [self.front_right, self.front_left, self.rear_right, self.rear_left]
@@ -107,7 +107,7 @@ class Car:
 
     def get_vertical_load(self, time=None):
 
-        time = float(self.current_time) if time is None else time
+        time = int(self.current_time) if time is None else time
         # Lets get the basic parameters;
         # Time delta (adding a delta means that there is a lag between the force being applied at the wheel 
         # and it causing load transfer). 
@@ -190,18 +190,18 @@ However, for the future this will be expanded to include the more complicated on
         a_y = forces[1] / self.mass
         a_z = forces[2] / self.mass
         self.acceleration = (a_x, a_y, a_z)
-        
+        dt = self.timestep / 100
         # Update velocity: v_new = v_old + a_new * dt
-        v_x = self.velocity[0] + a_x * self.timestep 
-        v_y = self.velocity[1] + a_y * self.timestep
-        v_z = self.velocity[2] + a_z * self.timestep
+        v_x = self.velocity[0] + a_x * dt
+        v_y = self.velocity[1] + a_y * dt
+        v_z = self.velocity[2] + a_z * dt
         v_z = 0
         self.velocity = (v_x, v_y, v_z)
         
         # Update position: p_new = p_old + v_new * dt + 0.5 * a_new * dt²
-        p_x = self.position[0] + v_x * self.timestep + 0.5 * a_x * self.timestep**2
-        p_y = self.position[1] + v_y * self.timestep + 0.5 * a_y * self.timestep**2
-        # p_z = self.position[2] + v_z * self.timestep + 0.5 * a_z * self.timestep**2
+        p_x = self.position[0] + v_x * dt + 0.5 * a_x * dt**2
+        p_y = self.position[1] + v_y * dt + 0.5 * a_y * dt**2
+        # p_z = self.position[2] + v_z * dt + 0.5 * a_z * dt**2
         p_z = 0
         self.position = (p_x, p_y, p_z)
         # Keep in mind that velocity and position are updated for the next timestep, whereas acceleration is for the current timestep
@@ -215,11 +215,12 @@ However, for the future this will be expanded to include the more complicated on
         torque_z = torques[2]
         angular_acceleration = torque_z / self.z_inertia
         
+        dt = self.timestep/100
         # Update angular velocity: ω_new = ω_old + α * dt
-        self.yaw_velocity = self.yaw_velocity + angular_acceleration * self.timestep
+        self.yaw_velocity = self.yaw_velocity + angular_acceleration * dt
         
         # Update yaw angle: θ_new = θ_old + ω_new * dt + 0.5 * α * dt²
-        self.yaw_angle = self.yaw_angle + self.yaw_velocity * self.timestep + 0.5 * angular_acceleration * self.timestep**2
+        self.yaw_angle = self.yaw_angle + self.yaw_velocity * dt + 0.5 * angular_acceleration * dt**2
         
         # Optional: normalize angle to keep it between 0 and 360 degrees
         self.yaw_angle = self.yaw_angle % 360
@@ -348,11 +349,25 @@ However, for the future this will be expanded to include the more complicated on
             for force_point, force_name in self.all_dataframes_for_update:
                 myvals = (force_point.get_time_series(time), force_name)
                 update_list.append(myvals)
-            append_new_rows(self.full_dataset, update_list, time)
+            self.full_dataset = append_new_rows(self.full_dataset, update_list, time)
 
         except Exception as e:
             print(e)
             __import__('pdb').set_trace()
+            print("Failed to update master dataframe")
+        
+        logger.info(f"Master Dataframe has been updated for timestep {self.current_time}")
+
+    def export_dataset(self, export_name=None):
+        import time
+        date_str = time.asctime()
+        export_name= f'dataset-export-{date_str}.csv' if export_name is None else f"{export_name}-{date_str}.csv"
+        
+        export_path = f"data_export/{export_name}"
+
+        with open(export_path, 'w') as file:
+            self.full_dataset.to_csv(file)
+        
 
 class force_point:
 
@@ -389,7 +404,7 @@ class force_point:
             print(e)
             import pbd; pdb.set_trace()
         total_force = sum([self.forces.data.at[time,force] for force in forces_in_direction])
-        logger.debug(f"Returning total forces in {direction} direction. Forces are : {forces_in_direction}. Sum was {total_force}")
+        logger.debug(f"Returning total forces in {direction} direction for point {self.name}. Forces are : {forces_in_direction}. Sum was {total_force}")
         
         return total_force
 

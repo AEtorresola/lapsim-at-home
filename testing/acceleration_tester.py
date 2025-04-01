@@ -38,13 +38,12 @@ def accelerate_straightline(length, car=ev):
         ev.get_vertical_load(ev.current_time)
 
         ev.accelerate_tires(acceleration_proportion=1, longitudinal_mode='accelerate')
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         ev.calculate_timestep(ev.current_time)
         
-        print(ev.current_time)
-        ev.current_time = round(ev.timestep+ev.current_time, 2)
-        print(ev.current_time)
+        ev.current_time = ev.timestep+ev.current_time
 
+    ev.export_dataset('75m-acceleration')
 
 
 if __name__ == "__main__":
