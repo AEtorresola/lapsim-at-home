@@ -47,7 +47,7 @@ class TimeSeriesStorage:
         """
         try:
             # Log the start of the update process
-            logger.info(f"Starting data update for {self.name}:{new_data} at time {time}")
+            logger.info(f"Starting data update for {self.name}:{f'{str(new_data)[:30]}...' if len(str(new_data)) > 30 else str(new_data)} at time {time}")
             
             # Check if all columns in new_data exist in the DataFrame
             if not all(col in self.data.columns for col in new_data.keys()):

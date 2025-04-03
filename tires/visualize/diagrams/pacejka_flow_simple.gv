@@ -1,0 +1,105 @@
+// Pacejka 2002 Combined Slip Model Flow - Simple Labels
+digraph Pacejka_Calculation_Flow_Simple {
+	graph [nodesep=0.6 rankdir=TB ranksep=1.0 splines=ortho]
+	node [fontname=Helvetica fontsize=10 shape=box style=rounded]
+	edge [arrowhead=vee arrowsize=0.7]
+	subgraph cluster_inputs {
+		color=lightgrey label="Base Inputs" style=filled
+		Fz [label=Fz shape=ellipse]
+		alpha [label=alpha shape=ellipse]
+		kappa [label=kappa shape=ellipse]
+		gamma [label=gamma shape=ellipse]
+		Fz_nom [label=Fz_nom shape=ellipse style=dashed]
+	}
+	dfz [label="dfz (Eq 29)"]
+	mu_y [label="mu_y (Eq 27)"]
+	K_y_alpha [label="K_y_alpha (Eq 28)"]
+	mu_x [label="mu_x (Approx, Eq 25)"]
+	K_x_kappa [label="K_x_kappa (Approx, Eq 26)"]
+	S_Hx [label="S_Hx (Approx, Eq 18)"]
+	S_Vx [label="S_Vx (Approx, Eq 17)"]
+	S_Hy [label="S_Hy (Eq 24)"]
+	S_Vy [label="S_Vy (Eq 23)"]
+	kappa_eff [label="kappa_eff (Eq 11)"]
+	alpha_eff [label="alpha_eff (Eq 12)"]
+	D_x [label="D_x (Approx, Eq 13)"]
+	C_x [label="C_x (Approx, Eq 14)"]
+	B_x [label="B_x (Approx, Eq 15)"]
+	E_x [label="E_x (Approx, Eq 16)"]
+	D_y [label="D_y (Eq 19)"]
+	C_y [label="C_y (Eq 20)"]
+	B_y [label="B_y (Eq 21)"]
+	E_y [label="E_y (Eq 22)"]
+	Fx_pure [label="Fx_pure (Approx, Eq 5)"]
+	Fy_pure [label="Fy_pure (Eq 6)"]
+	B_xa [label="B_xa (Approx, Eq 7)"]
+	C_xa [label="C_xa (Approx, Eq 8)"]
+	B_yk [label="B_yk (Approx, Eq 9)"]
+	C_yk [label="C_yk (Approx, Eq 10)"]
+	G_xa [label="G_xa (Approx, Eq 3)"]
+	G_yk [label="G_yk (Approx, Eq 4)"]
+	Fx_combined [label="Fx_combined (Eq 1)" shape=doubleoctagon]
+	Fy_combined [label="Fy_combined (Eq 2)" shape=doubleoctagon]
+	Fz -> dfz
+	Fz_nom -> dfz
+	dfz -> mu_y
+	gamma -> mu_y
+	Fz -> K_y_alpha
+	Fz_nom -> K_y_alpha
+	gamma -> K_y_alpha
+	dfz -> mu_x
+	gamma -> mu_x
+	Fz -> K_x_kappa
+	Fz_nom -> K_x_kappa
+	gamma -> K_x_kappa
+	dfz -> S_Hx
+	Fz -> S_Vx
+	dfz -> S_Vx
+	dfz -> S_Hy
+	gamma -> S_Hy
+	Fz -> S_Vy
+	dfz -> S_Vy
+	gamma -> S_Vy
+	kappa -> kappa_eff
+	S_Hx -> kappa_eff
+	alpha -> alpha_eff
+	S_Hy -> alpha_eff
+	mu_x -> D_x
+	Fz -> D_x
+	K_x_kappa -> B_x
+	C_x -> B_x
+	D_x -> B_x
+	dfz -> E_x
+	mu_y -> D_y
+	Fz -> D_y
+	K_y_alpha -> B_y
+	C_y -> B_y
+	D_y -> B_y
+	dfz -> E_y
+	gamma -> E_y
+	alpha_eff -> E_y
+	D_x -> Fx_pure
+	C_x -> Fx_pure
+	B_x -> Fx_pure
+	E_x -> Fx_pure
+	kappa_eff -> Fx_pure
+	S_Vx -> Fx_pure
+	D_y -> Fy_pure
+	C_y -> Fy_pure
+	B_y -> Fy_pure
+	E_y -> Fy_pure
+	alpha_eff -> Fy_pure
+	S_Vy -> Fy_pure
+	kappa -> B_xa
+	alpha -> B_yk
+	C_xa -> G_xa
+	B_xa -> G_xa
+	alpha -> G_xa
+	C_yk -> G_yk
+	B_yk -> G_yk
+	kappa -> G_yk
+	Fx_pure -> Fx_combined
+	G_xa -> Fx_combined
+	Fy_pure -> Fy_combined
+	G_yk -> Fy_combined
+}

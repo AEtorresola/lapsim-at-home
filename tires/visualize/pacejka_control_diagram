@@ -1,0 +1,97 @@
+// Pacejka 2002 Fx/Fy Control System Block Diagram
+digraph Pacejka_Control_Diagram {
+	label="Pacejka 2002 Fx/Fy Model" nodesep=0.5 rankdir=TB ranksep=1.0 splines=ortho
+	node [fontname=Helvetica fontsize=10 shape=box style=filled]
+	Fz_in [label=Fz fillcolor=lightblue shape=cds style=filled]
+	alpha_in [label="&#945;" fillcolor=lightblue shape=cds style=filled]
+	kappa_in [label="&#954;" fillcolor=lightblue shape=cds style=filled]
+	gamma_in [label="&#947;" fillcolor=lightblue shape=cds style=filled]
+	LatParams [label="Lateral
+Parameters" fillcolor=lightgrey shape=folder style=filled]
+	LonParams [label="Longitudinal
+Parameters
+(Approx.)" fillcolor=lightgrey shape=folder style=filled]
+	CombParams [label="Combined Slip
+Parameters
+(Approx.)" fillcolor=lightgrey shape=folder style=filled]
+	Fz_nom [label=Fz_nom fillcolor=lightgrey shape=folder style=filled]
+	subgraph cluster_intermediate {
+		label="Intermediate Parameter Calculations" style=dashed
+		Calc_dfz [label="Calculate
+dfz" fillcolor=white shape=box style="rounded,filled"]
+		Calc_Lat_Interm [label="Calculate Lateral
+Intermediates
+(&#956;y, Ky&#945;, Ey_parts, SHy, SVy)" fillcolor=white shape=box style="rounded,filled"]
+		Calc_Lon_Interm [label="Calculate Longitudinal
+Intermediates
+(&#956;x, Kx&#954;, Ex_parts, SHx, SVx)" fillcolor=white shape=box style="rounded,filled"]
+	}
+	subgraph cluster_effective_slip {
+		label="Effective Slip Calculation" style=dashed
+		Sum_alpha [label="+" fixedsize=true fontsize=14 shape=circle width=0.3]
+		Sum_kappa [label="+" fixedsize=true fontsize=14 shape=circle width=0.3]
+		alpha_eff [label="&#945;eff" shape=plaintext]
+		kappa_eff [label="&#954;eff" shape=plaintext]
+	}
+	subgraph cluster_pure_force {
+		label="Pure Force Calculation (Magic Formula)" style=dashed
+		MF_Fy [label="Magic Formula Fy
+(Calculate Fy_pure)" fillcolor=white shape=box style="rounded,filled"]
+		MF_Fx [label="Magic Formula Fx
+(Calculate Fx_pure)" fillcolor=white shape=box style="rounded,filled"]
+		Fx_pure [label=Fx_pure shape=plaintext]
+		Fy_pure [label=Fy_pure shape=plaintext]
+	}
+	subgraph cluster_weighting {
+		label="Combined Slip Weighting Factors" style=dashed
+		Calc_Gxa [label="Calculate Gx&#945;" fillcolor=white shape=box style="rounded,filled"]
+		Calc_Gyk [label="Calculate Gy&#954;" fillcolor=white shape=box style="rounded,filled"]
+		Gxa [label="Gx&#945;" shape=plaintext]
+		Gyk [label="Gy&#954;" shape=plaintext]
+	}
+	subgraph cluster_combined_force {
+		label="Combined Force Calculation" style=dashed
+		Mult_Fx [label=x fixedsize=true fontsize=12 shape=circle width=0.3]
+		Mult_Fy [label=x fixedsize=true fontsize=12 shape=circle width=0.3]
+	}
+	Fx_out [label=Fx fillcolor=palegreen peripheries=2 shape=cds style=filled]
+	Fy_out [label=Fy fillcolor=palegreen peripheries=2 shape=cds style=filled]
+	Fz_in -> Calc_dfz
+	Fz_nom -> Calc_dfz
+	Fz_in -> Calc_Lat_Interm
+	gamma_in -> Calc_Lat_Interm
+	Calc_dfz -> Calc_Lat_Interm
+	LatParams -> Calc_Lat_Interm
+	Fz_in -> Calc_Lon_Interm
+	gamma_in -> Calc_Lon_Interm
+	Calc_dfz -> Calc_Lon_Interm
+	LonParams -> Calc_Lon_Interm
+	Calc_Lat_Interm -> Sum_alpha [label=" SHy" lhead=cluster_effective_slip]
+	alpha_in -> Sum_alpha
+	Sum_alpha -> alpha_eff
+	Calc_Lon_Interm -> Sum_kappa [label=" SHx" lhead=cluster_effective_slip]
+	kappa_in -> Sum_kappa
+	Sum_kappa -> kappa_eff
+	alpha_eff -> MF_Fy
+	Calc_Lat_Interm -> MF_Fy [label=" Lat Intermediates"]
+	Fz_in -> MF_Fy
+	MF_Fy -> Fy_pure
+	kappa_eff -> MF_Fx
+	Calc_Lon_Interm -> MF_Fx [label=" Lon Intermediates"]
+	Fz_in -> MF_Fx
+	MF_Fx -> Fx_pure
+	alpha_in -> Calc_Gxa
+	kappa_in -> Calc_Gxa
+	CombParams -> Calc_Gxa
+	Calc_Gxa -> Gxa
+	alpha_in -> Calc_Gyk
+	kappa_in -> Calc_Gyk
+	CombParams -> Calc_Gyk
+	Calc_Gyk -> Gyk
+	Fx_pure -> Mult_Fx
+	Gxa -> Mult_Fx
+	Mult_Fx -> Fx_out
+	Fy_pure -> Mult_Fy
+	Gyk -> Mult_Fy
+	Mult_Fy -> Fy_out
+}

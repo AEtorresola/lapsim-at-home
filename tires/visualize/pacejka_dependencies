@@ -1,0 +1,179 @@
+// Pacejka 2002 Fx/Fy Dependencies
+digraph Pacejka_Model_Dependencies {
+	nodesep=0.3 rankdir=LR ranksep=0.8 splines=spline
+	node [fontname=Helvetica fontsize=10 shape=ellipse style=filled]
+	subgraph cluster_inputs {
+		color=lightgrey label="Base Inputs" style=filled
+		Fz [label="Fz
+(Vertical Load)" fillcolor=lightblue]
+		alpha [label="alpha
+(Slip Angle)" fillcolor=lightblue]
+		kappa [label="kappa
+(Slip Ratio)" fillcolor=lightblue]
+		gamma [label="gamma
+(Camber Angle)" fillcolor=lightblue]
+		Fz_nom [label="Fz_nom
+(Nominal Load)" fillcolor=lightgrey shape=box style=filled]
+	}
+	subgraph cluster_params {
+		color=lightgrey label="Model Parameters" style=filled
+		LatParams [label="Lateral Params
+(p_cy1, p_dy1..3, ...)" fillcolor=lightgrey shape=box style=filled]
+		LonParams [label="Longitudinal Params
+(p_cx1, p_dx1..3, ...)
+[Approximated]" fillcolor=lightgrey shape=box style=filled]
+		CombParams [label="Combined Slip Params
+(r_bx1..2, r_cx1, ...)
+[Approximated]" fillcolor=lightgrey shape=box style=filled]
+	}
+	subgraph cluster_level5 {
+		label="Level 5 Calculations" style=dotted
+		dfz [label="dfz
+(Normalized Load)" fillcolor=white shape=box style="rounded,filled"]
+		mu_x [label="mu_x
+(Lon Friction Pot.)" fillcolor=white shape=box style="rounded,filled"]
+		K_x_kappa [label="K_x_kappa
+(Lon Stiffness)" fillcolor=white shape=box style="rounded,filled"]
+		mu_y [label="mu_y
+(Lat Friction Pot.)" fillcolor=white shape=box style="rounded,filled"]
+		K_y_alpha [label="K_y_alpha
+(Cornering Stiffness)" fillcolor=white shape=box style="rounded,filled"]
+	}
+	subgraph cluster_level4 {
+		label="Level 4 Calculations" style=dotted
+		Dx [label="D_x
+(Peak Factor Fx)" fillcolor=white shape=box style="rounded,filled"]
+		Cx [label="C_x
+(Shape Factor Fx)" fillcolor=white shape=box style="rounded,filled"]
+		Bx [label="B_x
+(Stiffness Factor Fx)" fillcolor=white shape=box style="rounded,filled"]
+		Ex [label="E_x
+(Curvature Factor Fx)" fillcolor=white shape=box style="rounded,filled"]
+		Svx [label="S_Vx
+(Vertical Shift Fx)" fillcolor=white shape=box style="rounded,filled"]
+		Shx [label="S_Hx
+(Horizontal Shift Fx)" fillcolor=white shape=box style="rounded,filled"]
+		Dy [label="D_y
+(Peak Factor Fy)" fillcolor=white shape=box style="rounded,filled"]
+		Cy [label="C_y
+(Shape Factor Fy)" fillcolor=white shape=box style="rounded,filled"]
+		By [label="B_y
+(Stiffness Factor Fy)" fillcolor=white shape=box style="rounded,filled"]
+		Ey [label="E_y
+(Curvature Factor Fy)" fillcolor=white shape=box style="rounded,filled"]
+		Svy [label="S_Vy
+(Vertical Shift Fy)" fillcolor=white shape=box style="rounded,filled"]
+		Shy [label="S_Hy
+(Horizontal Shift Fy)" fillcolor=white shape=box style="rounded,filled"]
+	}
+	subgraph cluster_level3 {
+		label="Level 3 Calculations" style=dotted
+		Bxa [label="B_xa
+(Slope Factor Gxa)" fillcolor=white shape=box style="rounded,filled"]
+		Cxa [label="C_xa
+(Shape Factor Gxa)" fillcolor=white shape=box style="rounded,filled"]
+		Byk [label="B_yk
+(Slope Factor Gyk)" fillcolor=white shape=box style="rounded,filled"]
+		Cyk [label="C_yk
+(Shape Factor Gyk)" fillcolor=white shape=box style="rounded,filled"]
+		kappa_eff [label="kappa_eff
+(Effective Slip Ratio)" fillcolor=white shape=box style="rounded,filled"]
+		alpha_eff [label="alpha_eff
+(Effective Slip Angle)" fillcolor=white shape=box style="rounded,filled"]
+	}
+	subgraph cluster_level2 {
+		label="Level 2 Calculations" style=dotted
+		Gxa [label="G_xa
+(Lon Weighting)" fillcolor=white shape=box style="rounded,filled"]
+		Gyk [label="G_yk
+(Lat Weighting)" fillcolor=white shape=box style="rounded,filled"]
+		Fx_pure [label="F_x_pure
+(Pure Lon Force)" fillcolor=white shape=box style="rounded,filled"]
+		Fy_pure [label="F_y_pure
+(Pure Lat Force)" fillcolor=white shape=box style="rounded,filled"]
+	}
+	subgraph cluster_level1 {
+		label="Level 1 Calculations" style=dotted
+		Fx_comb [label=Fx_combined fillcolor=palegreen shape=doubleoctagon style=filled]
+		Fy_comb [label=Fy_combined fillcolor=palegreen shape=doubleoctagon style=filled]
+	}
+	Fz -> dfz
+	Fz_nom -> dfz
+	dfz -> mu_x
+	gamma -> mu_x
+	LonParams -> mu_x
+	Fz -> K_x_kappa
+	Fz_nom -> K_x_kappa
+	gamma -> K_x_kappa
+	LonParams -> K_x_kappa
+	dfz -> mu_y
+	gamma -> mu_y
+	LatParams -> mu_y
+	Fz -> K_y_alpha
+	Fz_nom -> K_y_alpha
+	gamma -> K_y_alpha
+	LatParams -> K_y_alpha
+	mu_x -> Dx
+	Fz -> Dx
+	LonParams -> Cx
+	K_x_kappa -> Bx
+	Cx -> Bx
+	Dx -> Bx
+	LonParams -> Ex
+	dfz -> Ex
+	kappa_eff -> Ex
+	Fz -> Svx
+	dfz -> Svx
+	LonParams -> Svx
+	dfz -> Shx
+	LonParams -> Shx
+	mu_y -> Dy
+	Fz -> Dy
+	LatParams -> Cy
+	K_y_alpha -> By
+	Cy -> By
+	Dy -> By
+	LatParams -> Ey
+	dfz -> Ey
+	gamma -> Ey
+	alpha_eff -> Ey
+	Fz -> Svy
+	dfz -> Svy
+	gamma -> Svy
+	LatParams -> Svy
+	dfz -> Shy
+	gamma -> Shy
+	LatParams -> Shy
+	CombParams -> Bxa
+	kappa -> Bxa
+	CombParams -> Cxa
+	CombParams -> Byk
+	alpha -> Byk
+	CombParams -> Cyk
+	kappa -> kappa_eff
+	Shx -> kappa_eff
+	alpha -> alpha_eff
+	Shy -> alpha_eff
+	Cxa -> Gxa
+	Bxa -> Gxa
+	alpha -> Gxa
+	Cyk -> Gyk
+	Byk -> Gyk
+	kappa -> Gyk
+	Dx -> Fx_pure
+	Cx -> Fx_pure
+	Bx -> Fx_pure
+	Ex -> Fx_pure
+	Svx -> Fx_pure
+	kappa_eff -> Fx_pure
+	Dy -> Fy_pure
+	Cy -> Fy_pure
+	By -> Fy_pure
+	Ey -> Fy_pure
+	Svy -> Fy_pure
+	alpha_eff -> Fy_pure
+	Fx_pure -> Fx_comb
+	Gxa -> Fx_comb
+	Fy_pure -> Fy_comb
+	Gyk -> Fy_comb
+}
