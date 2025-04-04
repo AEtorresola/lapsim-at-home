@@ -368,43 +368,48 @@ class PacejkaTireSimplified:
         except Exception as e: logger.error(f"Error calculating min Fx potential: {e}"); return 0.0
 
     # --- Inverse Methods (Corrected) ---
-    def find_kappa_for_fx(self, target_fx, Fz, gamma, tol=1e-4, max_iter=100):
-        """ Finds kappa for target pure Fx, assuming alpha = 0. (Corrected) """
+    def find_kappa_for_fx(self, target_fx, Fz, gamma, tol=1e-4, max_iter=100, peak_kappa_guess=0.15, min_kappa_guess=-0.12):
+        """ Finds kappa for target pure Fx, handling peaks. (Corrected v2) """
         logger.debug(f"Finding kappa for target Fx={target_fx:.2f} N at Fz={Fz:.1f}, gamma={math.degrees(gamma):.2f} deg")
         try:
+            # ... (Setup Fz_proc, gamma_proc, p, nom_load, dfz, fz_ratio) ...
             Fz_proc, _, _, gamma_proc = self._clamp_inputs(Fz, 0.0, 0.0, gamma)
-            p = self.parameters
-            nom_load = self.nominal_load_z
+            p = self.parameters; nom_load = self.nominal_load_z
             dfz = (Fz_proc - nom_load) / nom_load if nom_load != 0 else 0
             fz_ratio = max(Fz_proc / nom_load, 1e-6) if nom_load != 0 else 1e-6
 
-            # Calculate components needed for checks and error function
+            # ... (Calculate components: mu_x, K_x_kappa, S_Hx, S_Vx, D_x, C_x, E_x_base) ...
             mu_x = (p['lon_peak_friction_d_pdx1'] + p['lon_friction_load_var_pdx2'] * dfz) * (1.0 + p['lon_friction_camber_var_pdx3'] * gamma_proc**2)
             K_x_kappa = p['lon_stiffness_k_pkx1'] * nom_load * math.sin(p['lon_stiffness_load_var_pkx2'] * math.atan(fz_ratio)) * (1.0 - p['lon_stiffness_load_exp_pkx3'] * abs(gamma_proc))
             S_Hx = p['lon_shift_h_phx1'] + p['lon_shift_load_var_phx2'] * dfz
             S_Vx = Fz_proc * (p['lon_shift_v_pvx1'] + p['lon_shift_v_load_var_pvx2'] * dfz)
             D_x = mu_x * Fz_proc
             C_x = p['lon_shape_factor_c_pcx1']
-            E_x_base = p['lon_curve_e_pex1'] + p['lon_curve_load_var_pex2'] * dfz # Simplified E_x
+            E_x_base = p['lon_curve_e_pex1'] + p['lon_curve_load_var_pex2'] * dfz
 
-            # 1. Check if target force is achievable
-            min_fx = -D_x + S_Vx # Min potential = -PeakMag + VerticalShift
-            max_fx = D_x + S_Vx  # Max potential = +PeakMag + VerticalShift
+            # 1. Check Achievable Range & Handle Peaks
+            min_fx = -D_x + S_Vx
+            max_fx = D_x + S_Vx
+            if abs(target_fx - max_fx) < tol:
+                logger.info(f"Target Fx ({target_fx:.2f}) is near peak ({max_fx:.2f}). Returning peak kappa guess: {peak_kappa_guess}")
+                return max(self.min_slip_ratio, min(self.max_slip_ratio, peak_kappa_guess)) # Clamp guess
+            if abs(target_fx - min_fx) < tol:
+                logger.info(f"Target Fx ({target_fx:.2f}) is near minimum ({min_fx:.2f}). Returning min kappa guess: {min_kappa_guess}")
+                return max(self.min_slip_ratio, min(self.max_slip_ratio, min_kappa_guess)) # Clamp guess
             if not (min_fx - tol <= target_fx <= max_fx + tol):
                 logger.warning(f"Target Fx={target_fx:.2f} is outside achievable range [{min_fx:.2f}, {max_fx:.2f}] N.")
-                return np.nan # Return immediately if unachievable
+                return np.nan
 
             # 2. Handle Target Fx near Vertical Shift (Zero Effective Slip)
-            # If target is very close to the force at zero effective slip, return kappa = -S_Hx
             if abs(target_fx - S_Vx) < tol:
                  kappa_result = -S_Hx
-                 # Ensure result is within bounds, although S_Hx should be small
                  kappa_result = max(self.min_slip_ratio, min(self.max_slip_ratio, kappa_result))
-                 logger.info(f"Target Fx ({target_fx:.2f}) is near vertical shift ({S_Vx:.2f}). Returning kappa = -S_Hx = {kappa_result:.4f}")
+                 logger.info(f"Target Fx ({target_fx:.2f}) near vertical shift ({S_Vx:.2f}). Returning kappa = -S_Hx = {kappa_result:.4f}")
                  return kappa_result
 
-            # 3. Define the error function for the solver
+            # 3. Define the error function (same as before)
             def fx_error(kappa_input):
+                # ... (fx_error function definition remains the same) ...
                 kappa_eff = kappa_input + S_Hx
                 denominator_bx = C_x * D_x
                 B_x = K_x_kappa / denominator_bx if abs(denominator_bx) > 1e-6 else 0.0
@@ -419,68 +424,44 @@ class PacejkaTireSimplified:
                     except ValueError: fx_pure_calc = S_Vx
                 return fx_pure_calc - target_fx
 
-            # 4. Use root-finding algorithm
+
+            # 4. Use root-finding algorithm (same as before, including fallback)
+            # ... (solver logic remains the same) ...
             search_min = self.min_slip_ratio * 1.1; search_max = self.max_slip_ratio * 1.1
-            # Ensure bracket endpoints are different
-            if abs(search_min - search_max) < 1e-9:
-                 logger.warning("Slip ratio search range is too small.")
-                 return np.nan
-
+            if abs(search_min - search_max) < 1e-9: logger.warning("Slip ratio search range too small."); return np.nan
             try:
-                # Evaluate error at boundaries BEFORE calling brentq
-                err_min = fx_error(search_min)
-                err_max = fx_error(search_max)
-
-                # Check if target is exactly met at a boundary (within tolerance)
+                err_min = fx_error(search_min); err_max = fx_error(search_max)
                 if abs(err_min) < tol: return search_min
                 if abs(err_max) < tol: return search_max
-
-                # Check if signs are opposite for brentq
                 if np.sign(err_min) != np.sign(err_max):
                     sol = root_scalar(fx_error, bracket=[search_min, search_max], method='brentq', xtol=tol, maxiter=max_iter)
-                    if sol.converged:
-                        logger.info(f"Found kappa={sol.root:.4f} for target Fx={target_fx:.2f} (brentq).")
-                        return sol.root
-                    else:
-                        logger.warning(f"Kappa solver (brentq) did not converge: {sol.flag}")
-                        # Fall through to try another method if desired, or return NaN
-                        return np.nan
+                    if sol.converged: logger.info(f"Found kappa={sol.root:.4f} for target Fx={target_fx:.2f} (brentq)."); return sol.root
+                    else: logger.warning(f"Kappa solver (brentq) failed: {sol.flag}"); return np.nan # Changed fallback for simplicity
                 else:
-                    # Signs are the same, bracketing failed.
-                    # This often happens if the target is achievable but very close to a peak,
-                    # or if the target=0 case wasn't caught perfectly by the check above.
-                    logger.warning(f"Kappa bracketing failed (errors: f({search_min:.3f})={err_min:.3f}, f({search_max:.3f})={err_max:.3f}). Target might be near peak or zero.")
-                    # Optional: Try a different solver like 'ridder' or return NaN
+                    logger.warning(f"Kappa bracketing failed (errors: f({search_min:.3f})={err_min:.3f}, f({search_max:.3f})={err_max:.3f}).")
+                    # Try ridder as fallback
                     try:
                          sol = root_scalar(fx_error, bracket=[search_min, search_max], method='ridder', xtol=tol, maxiter=max_iter)
-                         if sol.converged:
-                             logger.info(f"Found kappa={sol.root:.4f} for target Fx={target_fx:.2f} (ridder).")
-                             return sol.root
-                         else:
-                             logger.warning(f"Kappa solver (ridder) also failed: {sol.flag}")
-                             return np.nan
-                    except ValueError: # Ridder might also fail if signs are same
-                         logger.warning("Ridder method also failed for kappa.")
-                         return np.nan
+                         if sol.converged: logger.info(f"Found kappa={sol.root:.4f} for target Fx={target_fx:.2f} (ridder)."); return sol.root
+                         else: logger.warning(f"Kappa solver (ridder) also failed: {sol.flag}"); return np.nan
+                    except ValueError: logger.warning("Ridder method also failed for kappa."); return np.nan
+            except ValueError as e: logger.warning(f"Root finding error for kappa: {e}"); return np.nan
 
-            except ValueError as e: # Catch errors from root_scalar itself
-                logger.warning(f"Root finding error for kappa: {e}")
-                return np.nan
         except Exception as e:
             logger.error(f"Unexpected error in find_kappa_for_fx: {e}")
             return np.nan
 
-    def find_alpha_for_fy(self, target_fy, Fz, gamma, tol=1e-4, max_iter=100):
-        """ Finds alpha for target pure Fy, assuming kappa = 0. (Corrected) """
+    def find_alpha_for_fy(self, target_fy, Fz, gamma, tol=1e-4, max_iter=100, peak_alpha_guess=math.radians(8), min_alpha_guess=math.radians(-8)):
+        """ Finds alpha for target pure Fy, handling peaks. (Corrected v2) """
         logger.debug(f"Finding alpha for target Fy={target_fy:.2f} N at Fz={Fz:.1f}, gamma={math.degrees(gamma):.2f} deg")
         try:
+            # ... (Setup Fz_proc, gamma_proc, p, nom_load, dfz, fz_ratio) ...
             Fz_proc, _, _, gamma_proc = self._clamp_inputs(Fz, 0.0, 0.0, gamma)
-            p = self.parameters
-            nom_load = self.nominal_load_z
+            p = self.parameters; nom_load = self.nominal_load_z
             dfz = (Fz_proc - nom_load) / nom_load if nom_load != 0 else 0
             fz_ratio = max(Fz_proc / nom_load, 1e-6) if nom_load != 0 else 1e-6
 
-            # Calculate components needed for checks and error function
+            # ... (Calculate components: mu_y, D_y, S_Vy, K_y_alpha, S_Hy, C_y, E_y_base, E_y_gamma_term) ...
             mu_y = (p['lat_peak_friction_d_pdy1'] + p['lat_friction_load_var_pdy2'] * dfz) * (1.0 + p['lat_friction_camber_var_pdy3'] * gamma_proc**2)
             D_y = mu_y * Fz_proc
             S_Vy = Fz_proc * ((p['lat_shift_v_pvy1'] + p['lat_shift_v_load_var_pvy2'] * dfz) + (p['lat_shift_v_camber_var_pvy3'] + p['lat_shift_v_camber_load_var_pvy4'] * dfz) * gamma_proc)
@@ -490,27 +471,38 @@ class PacejkaTireSimplified:
             E_y_base = p['lat_curve_e_pey1'] + p['lat_curve_load_var_pey2'] * dfz
             E_y_gamma_term = p['lat_curve_camber_dep_0_pey3'] + p['lat_curve_camber_var_pey4'] * gamma_proc
 
-            # 1. Check if target force is achievable
-            # Use approximate range check as Ey depends on sign(alpha_eff)
+            # 1. Check Achievable Range & Handle Peaks
+            # Note: Actual peak Fy depends on sign(alpha_eff) via Ey. This is still approximate.
             max_fy_approx = D_y + S_Vy
             min_fy_approx = -D_y + S_Vy
-            # Ensure correct min/max comparison if Dy is negative (unlikely but possible)
             fy_lower_bound = min(min_fy_approx, max_fy_approx)
             fy_upper_bound = max(min_fy_approx, max_fy_approx)
+
+            # Check if target is near approximate peaks
+            if abs(target_fy - fy_upper_bound) < tol:
+                 # Which alpha guess depends on sign of Dy
+                 alpha_guess = peak_alpha_guess if D_y > 0 else min_alpha_guess
+                 logger.info(f"Target Fy ({target_fy:.2f}) near approx peak ({fy_upper_bound:.2f}). Returning alpha guess: {math.degrees(alpha_guess):.3f} deg")
+                 return max(self.min_slip_angle, min(self.max_slip_angle, alpha_guess))
+            if abs(target_fy - fy_lower_bound) < tol:
+                 alpha_guess = min_alpha_guess if D_y > 0 else peak_alpha_guess
+                 logger.info(f"Target Fy ({target_fy:.2f}) near approx minimum ({fy_lower_bound:.2f}). Returning alpha guess: {math.degrees(alpha_guess):.3f} deg")
+                 return max(self.min_slip_angle, min(self.max_slip_angle, alpha_guess))
+            # Check if outside range
             if not (fy_lower_bound - tol <= target_fy <= fy_upper_bound + tol):
                  logger.warning(f"Target Fy={target_fy:.2f} outside approx range [{fy_lower_bound:.2f}, {fy_upper_bound:.2f}]")
-                 return np.nan # Return immediately
+                 return np.nan
 
-            # 2. Handle Target Fy near Vertical Shift (Zero Effective Slip)
+            # 2. Handle Target Fy near Vertical Shift
             if abs(target_fy - S_Vy) < tol:
                  alpha_result = -S_Hy
-                 # Ensure result is within bounds
                  alpha_result = max(self.min_slip_angle, min(self.max_slip_angle, alpha_result))
-                 logger.info(f"Target Fy ({target_fy:.2f}) is near vertical shift ({S_Vy:.2f}). Returning alpha = -S_Hy = {math.degrees(alpha_result):.3f} deg")
+                 logger.info(f"Target Fy ({target_fy:.2f}) near vertical shift ({S_Vy:.2f}). Returning alpha = -S_Hy = {math.degrees(alpha_result):.3f} deg")
                  return alpha_result
 
-            # 3. Define the error function for the solver
+            # 3. Define the error function (same as before)
             def fy_error(alpha_input):
+                # ... (fy_error function definition remains the same) ...
                 alpha_eff = alpha_input + S_Hy
                 denominator_by = C_y * D_y
                 B_y = K_y_alpha / denominator_by if abs(denominator_by) > 1e-6 else 0.0
@@ -526,41 +518,30 @@ class PacejkaTireSimplified:
                     except ValueError: fy_pure_calc = S_Vy
                 return fy_pure_calc - target_fy
 
-            # 4. Use root-finding algorithm
+            # 4. Use root-finding algorithm (same as before, including fallback)
+            # ... (solver logic remains the same) ...
             search_min = self.min_slip_angle * 1.1; search_max = self.max_slip_angle * 1.1
             if abs(search_min - search_max) < 1e-9: logger.warning("Slip angle search range too small."); return np.nan
-
             try:
-                # Evaluate error at boundaries BEFORE calling brentq
-                err_min = fy_error(search_min)
-                err_max = fy_error(search_max)
-
+                err_min = fy_error(search_min); err_max = fy_error(search_max)
                 if abs(err_min) < tol: return search_min
                 if abs(err_max) < tol: return search_max
-
                 if np.sign(err_min) != np.sign(err_max):
                     sol = root_scalar(fy_error, bracket=[search_min, search_max], method='brentq', xtol=tol, maxiter=max_iter)
-                    if sol.converged:
-                        logger.info(f"Found alpha={math.degrees(sol.root):.3f} deg for target Fy={target_fy:.2f} (brentq).")
-                        return sol.root
-                    else:
-                        logger.warning(f"Alpha solver (brentq) did not converge: {sol.flag}")
-                        return np.nan # Or try fallback
+                    if sol.converged: logger.info(f"Found alpha={math.degrees(sol.root):.3f} deg for target Fy={target_fy:.2f} (brentq)."); return sol.root
+                    else: logger.warning(f"Alpha solver (brentq) failed: {sol.flag}"); return np.nan
                 else:
-                    logger.warning(f"Alpha bracketing failed (errors: f({search_min:.3f})={err_min:.3f}, f({search_max:.3f})={err_max:.3f}). Target might be near peak or zero.")
-                    # Optional: Try fallback solver
-                    try:
+                    logger.warning(f"Alpha bracketing failed (errors: f({search_min:.3f})={err_min:.3f}, f({search_max:.3f})={err_max:.3f}).")
+                    try: # Fallback to ridder
                          sol = root_scalar(fy_error, bracket=[search_min, search_max], method='ridder', xtol=tol, maxiter=max_iter)
-                         if sol.converged:
-                             logger.info(f"Found alpha={math.degrees(sol.root):.3f} deg for target Fy={target_fy:.2f} (ridder).")
-                             return sol.root
-                         else:
-                             logger.warning(f"Alpha solver (ridder) also failed: {sol.flag}")
-                             return np.nan
+                         if sol.converged: logger.info(f"Found alpha={math.degrees(sol.root):.3f} deg for target Fy={target_fy:.2f} (ridder)."); return sol.root
+                         else: logger.warning(f"Alpha solver (ridder) also failed: {sol.flag}"); return np.nan
                     except ValueError: logger.warning("Ridder method also failed for alpha."); return np.nan
-
             except ValueError as e: logger.warning(f"Root finding error for alpha: {e}"); return np.nan
-        except Exception as e: logger.error(f"Unexpected error in find_alpha_for_fy: {e}"); return np.nan
+
+        except Exception as e:
+            logger.error(f"Unexpected error in find_alpha_for_fy: {e}")
+            return np.nan
 
     def find_slips_prioritizing_fy(self, target_fy, Fz, gamma, longitudinal_mode, longitudinal_intensity=1.0, tol=1e-4):
         """ Finds alpha for target_fy, then kappa for scaled remaining Fx capacity. """
