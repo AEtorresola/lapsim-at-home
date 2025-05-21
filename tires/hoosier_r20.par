@@ -1,0 +1,115 @@
+
+# Hoosier R20 190/40R10 Tire Parameters (Pacejka 2002 based)
+# File format: key = value
+# Comments start with # or !
+
+[CONSTANTS]
+# Nominal vertical load (N) from [VERTICAL] FNOMIN
+nominal_load_z = 667.0
+# Unloaded radius (m) from [DIMENSION] UNLOADED_RADIUS
+unloaded_radius = 0.2032
+
+[RANGES]
+# Minimum valid slip ratio from [LONG_SLIP_RANGE] KPUMIN
+min_slip_ratio = -0.25
+# Maximum valid slip ratio from [LONG_SLIP_RANGE] KPUMAX
+max_slip_ratio = 0.25
+# Minimum valid slip angle (rad) from [SLIP_ANGLE_RANGE] ALPMIN
+min_slip_angle = -0.261799
+# Maximum valid slip angle (rad) from [SLIP_ANGLE_RANGE] ALPMAX
+max_slip_angle = 0.261799
+# Minimum valid camber angle (rad) from [INCLINATION_ANGLE_RANGE] CAMMIN
+min_camber = -0.069813
+# Maximum valid camber angle (rad) from [INCLINATION_ANGLE_RANGE] CAMMAX
+max_camber = 0.069813
+# Minimum allowed wheel load (N) from [VERTICAL_FORCE_RANGE] FZMIN
+min_load_z = 100.0
+# Maximum allowed wheel load (N) from [VERTICAL_FORCE_RANGE] FZMAX
+max_load_z = 1110.0
+
+[LATERAL_COEFFICIENTS]
+# Shape factor Cfy for lateral forces (PCY1)
+lat_shape_factor_c_pcy1 = 1.25788
+# Lateral friction Muy (PDY1)
+lat_peak_friction_d_pdy1 = -2.50993
+# Variation of friction Muy with load (PDY2)
+lat_friction_load_var_pdy2 = 0.0780647
+# Variation of friction Muy with squared camber (PDY3)
+lat_friction_camber_var_pdy3 = 8.37358
+# Lateral curvature Efy at Fznom (PEY1)
+lat_curve_e_pey1 = -0.59049
+# Variation of curvature Efy with load (PEY2)
+lat_curve_load_var_pey2 = 0.162594
+# Zero order camber dependency of curvature Efy (PEY3)
+lat_curve_camber_dep_0_pey3 = 0.0
+# Variation of curvature Efy with camber (PEY4)
+lat_curve_camber_var_pey4 = 10.3142
+# Maximum value of stiffness Kfy/Fznom (PKY1)
+lat_stiffness_k_max_pky1 = -46.3491
+# Load at which Kfy reaches maximum value (PKY2)
+lat_stiffness_load_max_pky2 = 1.4492
+# Variation of Kfy/Fznom with camber (PKY3)
+lat_stiffness_camber_var_pky3 = 0.639078
+# Horizontal shift Shy at Fznom (PHY1)
+lat_shift_h_phy1 = -0.00108397
+# Variation of shift Shy with load (PHY2)
+lat_shift_load_var_phy2 = 0.00258753
+# Variation of shift Shy with camber (PHY3)
+lat_shift_camber_var_phy3 = 0.112578
+# Vertical shift in Svy/Fz at Fznom (PVY1)
+lat_shift_v_pvy1 = -0.0292988
+# Variation of shift Svy/Fz with load (PVY2)
+lat_shift_v_load_var_pvy2 = 0.0487652
+# Variation of shift Svy/Fz with camber (PVY3)
+lat_shift_v_camber_var_pvy3 = -0.586156
+# Variation of shift Svy/Fz with camber and load (PVY4)
+lat_shift_v_camber_load_var_pvy4 = -0.716249
+
+[LONGITUDINAL_COEFFICIENTS_APPROX]
+# Shape factor Cfx for longitudinal force (PCX1 = PCY1)
+lon_shape_factor_c_pcx1 = 1.25788
+# Longitudinal friction Mux at Fznom (PDX1 approx -PDY1 * 1.1)
+lon_peak_friction_d_pdx1 = 2.760923
+# Variation of friction Mux with load (PDX2 approx PDY2 * 0.8)
+lon_friction_load_var_pdx2 = 0.06245176
+# Variation of friction Mux with camber (PDX3 approx PDY3 * 0.3)
+lon_friction_camber_var_pdx3 = 2.512074
+# Longitudinal curvature Efx at Fznom (PEX1 approx -PEY1 * 0.9)
+lon_curve_e_pex1 = 0.531441
+# Variation of curvature Efx with load (PEX2 approx PEY2 * 0.9)
+lon_curve_load_var_pex2 = 0.1463346
+# Variation of curvature Efx with load squared (PEX3 approx 0)
+lon_curve_load_sq_var_pex3 = 0.0
+# Factor in curvature Efx while driving (PEX4 approx 0)
+lon_curve_driving_factor_pex4 = 0.0
+# Longitudinal slip stiffness Kfx/Fz at Fznom (PKX1 approx -PKY1 * 2.0)
+lon_stiffness_k_pkx1 = 92.6982
+# Variation of slip stiffness Kfx/Fz with load (PKX2 approx PKY2)
+lon_stiffness_load_var_pkx2 = 1.4492
+# Exponent in slip stiffness Kfx/Fz with load (PKX3 approx PKY3 * 0.5)
+lon_stiffness_load_exp_pkx3 = 0.319539
+# Horizontal shift Shx at Fznom (PHX1 approx PHY1)
+lon_shift_h_phx1 = -0.00108397
+# Variation of shift Shx with load (PHX2 approx PHY2)
+lon_shift_load_var_phx2 = 0.00258753
+# Vertical shift Svx/Fz at Fznom (PVX1 approx PVY1)
+lon_shift_v_pvx1 = -0.0292988
+# Variation of shift Svx/Fz with load (PVX2 approx PVY2)
+lon_shift_v_load_var_pvx2 = 0.0487652
+
+[COMBINED_SLIP_COEFFICIENTS_APPROX]
+# Slope factor for combined Fy reduction (RBY1 approx 10.0)
+comb_lat_slope_b_rby1 = 10.0
+# Variation of slope Fy reduction with alpha (RBY2 approx 6.0)
+comb_lat_slope_alpha_var_rby2 = 6.0
+# Shift term for alpha in slope Fy reduction (RBY3 approx 0.0)
+comb_lat_slope_alpha_shift_rby3 = 0.0
+# Shape factor for combined Fy reduction (RCY1 approx 1.0)
+comb_lat_shape_c_rcy1 = 1.0
+# Slope factor for combined Fx reduction (RBX1 approx 12.0)
+comb_lon_slope_b_rbx1 = 12.0
+# Variation of slope Fx reduction with kappa (RBX2 approx 6.0)
+comb_lon_slope_kappa_var_rbx2 = 6.0
+# Shape factor for combined Fx reduction (RCX1 approx 1.0)
+comb_lon_shape_c_rcx1 = 1.0
+

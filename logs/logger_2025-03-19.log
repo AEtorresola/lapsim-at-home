@@ -1,0 +1,170 @@
+2025-03-19 11:08:43,163 | INFO     | magic_formula_tire.py:15 | Starting Car.py Script
+2025-03-19 11:08:43,165 | INFO     | car.py:14 | Starting Car.py Script
+2025-03-19 11:08:43,170 | INFO     | helper_functions.py:50 | Starting data update for vehicle_dataframe:{'velocity': (0, 0, 0), 'position': (0, 0, 0)} at time 5
+2025-03-19 11:08:43,690 | INFO     | magic_formula_tire.py:461 | Generated force to slip lookup table.
+2025-03-19 11:08:43,691 | DEBUG    | car.py:423 | Forces and Moments:
+2025-03-19 11:08:43,691 | DEBUG    | car.py:427 | Slip Ratio and Angle:
+2025-03-19 11:08:44,209 | INFO     | magic_formula_tire.py:461 | Generated force to slip lookup table.
+2025-03-19 11:08:44,209 | DEBUG    | car.py:423 | Forces and Moments:
+2025-03-19 11:08:44,209 | DEBUG    | car.py:427 | Slip Ratio and Angle:
+2025-03-19 11:08:44,724 | INFO     | magic_formula_tire.py:461 | Generated force to slip lookup table.
+2025-03-19 11:08:44,724 | DEBUG    | car.py:423 | Forces and Moments:
+2025-03-19 11:08:44,724 | DEBUG    | car.py:427 | Slip Ratio and Angle:
+2025-03-19 11:08:45,236 | INFO     | magic_formula_tire.py:461 | Generated force to slip lookup table.
+2025-03-19 11:08:45,236 | DEBUG    | car.py:423 | Forces and Moments:
+2025-03-19 11:08:45,236 | DEBUG    | car.py:427 | Slip Ratio and Angle:
+2025-03-19 11:08:45,237 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0
+2025-03-19 11:08:45,237 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0
+2025-03-19 11:08:45,237 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0
+2025-03-19 11:08:45,237 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0
+2025-03-19 11:08:45,237 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_left. Forces are : ['y_friction']. Sum was 0
+2025-03-19 11:08:45,237 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_left. Forces are : ['y_friction']. Sum was 0
+2025-03-19 11:08:45,238 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_right. Forces are : ['y_friction']. Sum was 0
+2025-03-19 11:08:45,238 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_right. Forces are : ['y_friction']. Sum was 0
+2025-03-19 11:08:45,238 | INFO     | helper_functions.py:50 | Starting data update for front_right:{'vertical_load': np.float64(613.125)} at time 5
+2025-03-19 11:08:45,239 | INFO     | helper_functions.py:50 | Starting data update for front_left:{'vertical_load': np.float64(613.125)} at time 5
+2025-03-19 11:08:45,240 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'vertical_load': np.float64(613.125)} at time 5
+2025-03-19 11:08:45,241 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'vertical_load': np.float64(613.125)} at time 5
+2025-03-19 11:08:45,241 | INFO     | helper_functions.py:50 | Starting data update for front_right:{'x_friction': 0, 'y_friction': 0, 'rolling_resistance': 0} at time 5
+2025-03-19 11:08:45,242 | INFO     | helper_functions.py:50 | Starting data update for front_left:{'x_friction': 0, 'y_friction': 0, 'rolling_resistance': 0} at time 5
+2025-03-19 11:08:45,242 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'x_friction': 0, 'y_friction': 0, 'rolling_resistance': 0} at time 5
+2025-03-19 11:08:45,242 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'x_friction': 0, 'y_friction': 0, 'rolling_resistance': 0} at time 5
+2025-03-19 11:08:45,242 | INFO     | helper_functions.py:50 | Starting data update for cnt_grav:{'inertial_z': 0, 'inertial_x': 0, 'inertial_y': 0} at time 5
+2025-03-19 11:08:45,243 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0.0
+2025-03-19 11:08:45,243 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:08:45,243 | DEBUG    | car.py:396 | Returning total forces in z direction for point front_right. Forces are : ['vertical_load']. Sum was 613.125
+2025-03-19 11:08:45,243 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0.0
+2025-03-19 11:08:45,243 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:08:45,243 | DEBUG    | car.py:396 | Returning total forces in z direction for point front_left. Forces are : ['vertical_load']. Sum was 613.125
+2025-03-19 11:08:45,243 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0.0
+2025-03-19 11:08:45,243 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:08:45,243 | DEBUG    | car.py:396 | Returning total forces in z direction for point rear_right. Forces are : ['vertical_load']. Sum was 613.125
+2025-03-19 11:08:45,243 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0.0
+2025-03-19 11:08:45,243 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:08:45,244 | DEBUG    | car.py:396 | Returning total forces in z direction for point rear_left. Forces are : ['vertical_load']. Sum was 613.125
+2025-03-19 11:08:45,244 | DEBUG    | car.py:396 | Returning total forces in x direction for point cnt_grav. Forces are : ['inertial_x']. Sum was 0
+2025-03-19 11:08:45,244 | DEBUG    | car.py:396 | Returning total forces in y direction for point cnt_grav. Forces are : ['inertial_y']. Sum was 0
+2025-03-19 11:08:45,244 | DEBUG    | car.py:396 | Returning total forces in z direction for point cnt_grav. Forces are : ['inertial_z']. Sum was 0
+2025-03-19 11:08:45,244 | INFO     | car.py:287 | Timestep 5 had resultant forces of [np.float64(0.0), np.float64(0.0), np.float64(2452.5)] And resultant torques of [np.float64(1868.805), np.float64(1868.8049999999998), np.float64(0.0)]
+2025-03-19 11:08:45,244 | INFO     | helper_functions.py:50 | Starting data update for vehicle_dataframe:{'acceleration': (np.float64(0.0), np.float64(0.0), np.float64(9.81))} at time 5
+2025-03-19 11:08:45,244 | INFO     | helper_functions.py:50 | Starting data update for vehicle_dataframe:{'velocity': (np.float64(0.0), np.float64(0.0), 0), 'position': (np.float64(0.0), np.float64(0.0), 0)} at time 10
+2025-03-19 11:08:45,245 | DEBUG    | car.py:105 | After forces are applied; Position = (np.float64(0.0), np.float64(0.0), 0) -- Velocity = (np.float64(0.0), np.float64(0.0), 0) --
+2025-03-19 11:08:45,245 | DEBUG    | helper_functions.py:144 | All objects to combine were TimeSeries
+2025-03-19 11:08:45,250 | INFO     | acceleration_tester.py:12 | Starting Acceleration.py Script
+2025-03-19 11:08:45,251 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0.0
+2025-03-19 11:08:45,251 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0.0
+2025-03-19 11:08:45,251 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0.0
+2025-03-19 11:08:45,251 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was 0.0
+2025-03-19 11:08:45,251 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:08:45,251 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:08:45,251 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:08:45,251 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:08:45,251 | INFO     | helper_functions.py:50 | Starting data update for front_right:{'vertical_load': np.float64(613.125)} at time 5
+2025-03-19 11:08:45,251 | INFO     | helper_functions.py:50 | Starting data update for front_left:{'vertical_load': np.float64(613.125)} at time 5
+2025-03-19 11:08:45,251 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'vertical_load': np.float64(613.125)} at time 5
+2025-03-19 11:08:45,252 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'vertical_load': np.float64(613.125)} at time 5
+2025-03-19 11:08:45,252 | WARNING  | helper_functions.py:94 | Error: Time index '5' or column 'Fx' not found.
+2025-03-19 11:08:45,252 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'Fx': np.float64(301.35982032999317), 'Fy': np.float64(-0.0), 'Fz': np.float64(613.125), 'Mz': np.float64(0.0), 'max_Fx': np.float64(500.8346537514665), 'desired_Fx': np.float64(500.8346537514665), 'desired_Fy': 0.0, 'slip_ratio': 2.8780625292603683, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.0)} at time 5
+2025-03-19 11:08:45,254 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'Fx': np.float64(301.35982032999317), 'Fy': np.float64(-0.0), 'Fz': np.float64(613.125), 'Mz': np.float64(0.0), 'max_Fx': np.float64(500.8346537514665), 'desired_Fx': np.float64(500.8346537514665), 'desired_Fy': 0, 'slip_ratio': 2.8780625292603683, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.0), 'longitudinal_mode': 'accelerate'} at time 5
+2025-03-19 11:08:45,254 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'x_friction': np.float64(301.35982032999317), 'y_friction': np.float64(-0.0)} at time 5
+2025-03-19 11:08:45,255 | WARNING  | helper_functions.py:94 | Error: Time index '5' or column 'Fx' not found.
+2025-03-19 11:08:45,255 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'Fx': np.float64(301.35982032999317), 'Fy': np.float64(-0.0), 'Fz': np.float64(613.125), 'Mz': np.float64(0.0), 'max_Fx': np.float64(500.8346537514665), 'desired_Fx': np.float64(500.8346537514665), 'desired_Fy': 0.0, 'slip_ratio': 2.8780625292603683, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.0)} at time 5
+2025-03-19 11:08:45,256 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'Fx': np.float64(301.35982032999317), 'Fy': np.float64(-0.0), 'Fz': np.float64(613.125), 'Mz': np.float64(0.0), 'max_Fx': np.float64(500.8346537514665), 'desired_Fx': np.float64(500.8346537514665), 'desired_Fy': 0, 'slip_ratio': 2.8780625292603683, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.0), 'longitudinal_mode': 'accelerate'} at time 5
+2025-03-19 11:08:45,256 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'x_friction': np.float64(301.35982032999317), 'y_friction': np.float64(-0.0)} at time 5
+2025-03-19 11:08:45,257 | INFO     | helper_functions.py:50 | Starting data update for front_right:{'x_friction': 0, 'y_friction': 0, 'rolling_resistance': -100} at time 5
+2025-03-19 11:08:45,257 | INFO     | helper_functions.py:50 | Starting data update for front_left:{'x_friction': 0, 'y_friction': 0, 'rolling_resistance': -100} at time 5
+2025-03-19 11:08:45,257 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'x_friction': np.float64(301.35982032999317), 'y_friction': np.float64(-0.0), 'rolling_resistance': -100} at time 5
+2025-03-19 11:08:45,257 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'x_friction': np.float64(301.35982032999317), 'y_friction': np.float64(-0.0), 'rolling_resistance': -100} at time 5
+2025-03-19 11:08:45,257 | INFO     | helper_functions.py:50 | Starting data update for cnt_grav:{'inertial_z': 0, 'inertial_x': 0, 'inertial_y': 0} at time 5
+2025-03-19 11:20:24,749 | INFO     | car.py:169 | Calculating resultants at time : 5
+2025-03-19 11:20:24,751 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was -100.0
+2025-03-19 11:20:24,752 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:24,752 | DEBUG    | car.py:396 | Returning total forces in z direction for point front_right. Forces are : ['vertical_load']. Sum was 613.125
+2025-03-19 11:20:24,752 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was -100.0
+2025-03-19 11:20:24,752 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:24,752 | DEBUG    | car.py:396 | Returning total forces in z direction for point front_left. Forces are : ['vertical_load']. Sum was 613.125
+2025-03-19 11:20:24,752 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was 201.35982032999317
+2025-03-19 11:20:24,752 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:24,752 | DEBUG    | car.py:396 | Returning total forces in z direction for point rear_right. Forces are : ['vertical_load']. Sum was 613.125
+2025-03-19 11:20:24,752 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was 201.35982032999317
+2025-03-19 11:20:24,752 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:24,753 | DEBUG    | car.py:396 | Returning total forces in z direction for point rear_left. Forces are : ['vertical_load']. Sum was 613.125
+2025-03-19 11:20:24,753 | DEBUG    | car.py:396 | Returning total forces in x direction for point cnt_grav. Forces are : ['inertial_x']. Sum was 0
+2025-03-19 11:20:24,753 | DEBUG    | car.py:396 | Returning total forces in y direction for point cnt_grav. Forces are : ['inertial_y']. Sum was 0
+2025-03-19 11:20:24,753 | DEBUG    | car.py:396 | Returning total forces in z direction for point cnt_grav. Forces are : ['inertial_z']. Sum was 0
+2025-03-19 11:20:24,753 | INFO     | car.py:287 | Timestep 5 had resultant forces of [np.float64(202.71964065998634), np.float64(0.0), np.float64(2452.5)] And resultant torques of [np.float64(1868.805), np.float64(1812.1651323995998), np.float64(304.8)]
+2025-03-19 11:20:24,753 | INFO     | helper_functions.py:50 | Starting data update for vehicle_dataframe:{'acceleration': (np.float64(0.8108785626399454), np.float64(0.0), np.float64(9.81))} at time 5
+2025-03-19 11:20:24,753 | INFO     | helper_functions.py:50 | Starting data update for vehicle_dataframe:{'velocity': (np.float64(0.040543928131997274), np.float64(0.0), 0), 'position': (np.float64(0.003040794609899796), np.float64(0.0), 0)} at time 10
+2025-03-19 11:20:24,753 | DEBUG    | car.py:182 | After forces are applied; Position = (np.float64(0.003040794609899796), np.float64(0.0), 0) -- Velocity = (np.float64(0.040543928131997274), np.float64(0.0), 0) --
+2025-03-19 11:20:26,918 | INFO     | car.py:359 | Master Dataframe has been updated for timestep 5
+2025-03-19 11:20:26,919 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was 201.35982032999317
+2025-03-19 11:20:26,919 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was 201.35982032999317
+2025-03-19 11:20:26,919 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was -100.0
+2025-03-19 11:20:26,919 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was -100.0
+2025-03-19 11:20:26,919 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:26,919 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:26,920 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:26,920 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:26,920 | INFO     | helper_functions.py:50 | Starting data update for front_right:{'vertical_load': np.float64(502.6263992123358)} at time 10
+2025-03-19 11:20:26,921 | INFO     | helper_functions.py:50 | Starting data update for front_left:{'vertical_load': np.float64(502.6263992123358)} at time 10
+2025-03-19 11:20:26,922 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'vertical_load': np.float64(723.6236007876641)} at time 10
+2025-03-19 11:20:26,923 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'vertical_load': np.float64(723.6236007876641)} at time 10
+2025-03-19 11:20:26,924 | WARNING  | helper_functions.py:94 | Error: Time index '10' or column 'Fx' not found.
+2025-03-19 11:20:26,925 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'Fx': np.float64(343.79469672603364), 'Fy': np.float64(-0.0), 'Fz': np.float64(723.6236007876641), 'Mz': np.float64(0.0), 'max_Fx': np.float64(581.4396313403475), 'desired_Fx': np.float64(581.4396313403475), 'desired_Fy': np.float64(0.0), 'slip_ratio': 3.4632022172017787, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.040543928131997274)} at time 10
+2025-03-19 11:20:26,926 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'Fx': np.float64(343.79469672603364), 'Fy': np.float64(-0.0), 'Fz': np.float64(723.6236007876641), 'Mz': np.float64(0.0), 'max_Fx': np.float64(581.4396313403475), 'desired_Fx': np.float64(581.4396313403475), 'desired_Fy': 0, 'slip_ratio': 3.4632022172017787, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.040543928131997274), 'longitudinal_mode': 'accelerate'} at time 10
+2025-03-19 11:20:26,926 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'x_friction': np.float64(343.79469672603364), 'y_friction': np.float64(-0.0)} at time 10
+2025-03-19 11:20:26,927 | WARNING  | helper_functions.py:94 | Error: Time index '10' or column 'Fx' not found.
+2025-03-19 11:20:26,927 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'Fx': np.float64(343.79469672603364), 'Fy': np.float64(-0.0), 'Fz': np.float64(723.6236007876641), 'Mz': np.float64(0.0), 'max_Fx': np.float64(581.4396313403475), 'desired_Fx': np.float64(581.4396313403475), 'desired_Fy': np.float64(0.0), 'slip_ratio': 3.4632022172017787, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.040543928131997274)} at time 10
+2025-03-19 11:20:26,928 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'Fx': np.float64(343.79469672603364), 'Fy': np.float64(-0.0), 'Fz': np.float64(723.6236007876641), 'Mz': np.float64(0.0), 'max_Fx': np.float64(581.4396313403475), 'desired_Fx': np.float64(581.4396313403475), 'desired_Fy': 0, 'slip_ratio': 3.4632022172017787, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.040543928131997274), 'longitudinal_mode': 'accelerate'} at time 10
+2025-03-19 11:20:26,929 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'x_friction': np.float64(343.79469672603364), 'y_friction': np.float64(-0.0)} at time 10
+2025-03-19 11:20:26,929 | INFO     | helper_functions.py:50 | Starting data update for front_right:{'x_friction': 0, 'y_friction': 0, 'rolling_resistance': -100} at time 10
+2025-03-19 11:20:26,929 | INFO     | helper_functions.py:50 | Starting data update for front_left:{'x_friction': 0, 'y_friction': 0, 'rolling_resistance': -100} at time 10
+2025-03-19 11:20:26,929 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'x_friction': np.float64(343.79469672603364), 'y_friction': np.float64(-0.0), 'rolling_resistance': -100} at time 10
+2025-03-19 11:20:26,929 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'x_friction': np.float64(343.79469672603364), 'y_friction': np.float64(-0.0), 'rolling_resistance': -100} at time 10
+2025-03-19 11:20:26,929 | INFO     | helper_functions.py:50 | Starting data update for cnt_grav:{'inertial_z': 0, 'inertial_x': 0, 'inertial_y': 0} at time 10
+2025-03-19 11:20:30,362 | INFO     | car.py:169 | Calculating resultants at time : 10
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was -100.0
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in z direction for point front_right. Forces are : ['vertical_load']. Sum was 502.6263992123358
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was -100.0
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in z direction for point front_left. Forces are : ['vertical_load']. Sum was 502.6263992123358
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was 243.79469672603364
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in z direction for point rear_right. Forces are : ['vertical_load']. Sum was 723.6236007876641
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was 243.79469672603364
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:30,364 | DEBUG    | car.py:396 | Returning total forces in z direction for point rear_left. Forces are : ['vertical_load']. Sum was 723.6236007876641
+2025-03-19 11:20:30,365 | DEBUG    | car.py:396 | Returning total forces in x direction for point cnt_grav. Forces are : ['inertial_x']. Sum was 0
+2025-03-19 11:20:30,365 | DEBUG    | car.py:396 | Returning total forces in y direction for point cnt_grav. Forces are : ['inertial_y']. Sum was 0
+2025-03-19 11:20:30,365 | DEBUG    | car.py:396 | Returning total forces in z direction for point cnt_grav. Forces are : ['inertial_z']. Sum was 0
+2025-03-19 11:20:30,365 | INFO     | car.py:287 | Timestep 10 had resultant forces of [np.float64(287.58939345206727), np.float64(0.0), np.float64(2452.5)] And resultant torques of [np.float64(1532.0052647991995), np.float64(1788.4525234694925), np.float64(304.8)]
+2025-03-19 11:20:30,365 | INFO     | helper_functions.py:50 | Starting data update for vehicle_dataframe:{'acceleration': (np.float64(1.150357573808269), np.float64(0.0), np.float64(9.81))} at time 10
+2025-03-19 11:20:30,365 | INFO     | helper_functions.py:50 | Starting data update for vehicle_dataframe:{'velocity': (np.float64(0.09806180682241072), np.float64(0.0), 0), 'position': (np.float64(0.00938183191828067), np.float64(0.0), 0)} at time 15
+2025-03-19 11:20:30,366 | DEBUG    | car.py:182 | After forces are applied; Position = (np.float64(0.00938183191828067), np.float64(0.0), 0) -- Velocity = (np.float64(0.09806180682241072), np.float64(0.0), 0) --
+2025-03-19 11:20:33,892 | INFO     | car.py:359 | Master Dataframe has been updated for timestep 10
+2025-03-19 11:20:33,892 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was 243.79469672603364
+2025-03-19 11:20:33,892 | DEBUG    | car.py:396 | Returning total forces in x direction for point rear_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was 243.79469672603364
+2025-03-19 11:20:33,892 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_right. Forces are : ['x_friction', 'rolling_resistance']. Sum was -100.0
+2025-03-19 11:20:33,892 | DEBUG    | car.py:396 | Returning total forces in x direction for point front_left. Forces are : ['x_friction', 'rolling_resistance']. Sum was -100.0
+2025-03-19 11:20:33,892 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:33,892 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_left. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:33,892 | DEBUG    | car.py:396 | Returning total forces in y direction for point front_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:33,893 | DEBUG    | car.py:396 | Returning total forces in y direction for point rear_right. Forces are : ['y_friction']. Sum was 0.0
+2025-03-19 11:20:33,893 | INFO     | helper_functions.py:50 | Starting data update for front_right:{'vertical_load': np.float64(487.06694453378765)} at time 15
+2025-03-19 11:20:33,894 | INFO     | helper_functions.py:50 | Starting data update for front_left:{'vertical_load': np.float64(487.06694453378765)} at time 15
+2025-03-19 11:20:33,895 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'vertical_load': np.float64(739.1830554662123)} at time 15
+2025-03-19 11:20:33,896 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'vertical_load': np.float64(739.1830554662123)} at time 15
+2025-03-19 11:20:33,897 | WARNING  | helper_functions.py:94 | Error: Time index '15' or column 'Fx' not found.
+2025-03-19 11:20:33,897 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'Fx': np.float64(349.675455987849), 'Fy': np.float64(-0.0), 'Fz': np.float64(739.1830554662123), 'Mz': np.float64(0.0), 'max_Fx': np.float64(592.5423371860362), 'desired_Fx': np.float64(592.5423371860362), 'desired_Fy': np.float64(0.0), 'slip_ratio': 3.5438006371528026, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.09806180682241072)} at time 15
+2025-03-19 11:20:33,899 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'Fx': np.float64(349.675455987849), 'Fy': np.float64(-0.0), 'Fz': np.float64(739.1830554662123), 'Mz': np.float64(0.0), 'max_Fx': np.float64(592.5423371860362), 'desired_Fx': np.float64(592.5423371860362), 'desired_Fy': 0, 'slip_ratio': 3.5438006371528026, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.09806180682241072), 'longitudinal_mode': 'accelerate'} at time 15
+2025-03-19 11:20:33,899 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'x_friction': np.float64(349.675455987849), 'y_friction': np.float64(-0.0)} at time 15
+2025-03-19 11:20:33,899 | WARNING  | helper_functions.py:94 | Error: Time index '15' or column 'Fx' not found.
+2025-03-19 11:20:33,899 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'Fx': np.float64(349.675455987849), 'Fy': np.float64(-0.0), 'Fz': np.float64(739.1830554662123), 'Mz': np.float64(0.0), 'max_Fx': np.float64(592.5423371860362), 'desired_Fx': np.float64(592.5423371860362), 'desired_Fy': np.float64(0.0), 'slip_ratio': 3.5438006371528026, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.09806180682241072)} at time 15
+2025-03-19 11:20:33,901 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'Fx': np.float64(349.675455987849), 'Fy': np.float64(-0.0), 'Fz': np.float64(739.1830554662123), 'Mz': np.float64(0.0), 'max_Fx': np.float64(592.5423371860362), 'desired_Fx': np.float64(592.5423371860362), 'desired_Fy': 0, 'slip_ratio': 3.5438006371528026, 'slip_angle': 0.0, 'angular_velocity': np.float64(nan), 'Vx': np.float64(0.09806180682241072), 'longitudinal_mode': 'accelerate'} at time 15
+2025-03-19 11:20:33,901 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'x_friction': np.float64(349.675455987849), 'y_friction': np.float64(-0.0)} at time 15
+2025-03-19 11:20:33,901 | INFO     | helper_functions.py:50 | Starting data update for front_right:{'x_friction': 0, 'y_friction': 0, 'rolling_resistance': -100} at time 15
+2025-03-19 11:20:33,901 | INFO     | helper_functions.py:50 | Starting data update for front_left:{'x_friction': 0, 'y_friction': 0, 'rolling_resistance': -100} at time 15
+2025-03-19 11:20:33,902 | INFO     | helper_functions.py:50 | Starting data update for rear_right:{'x_friction': np.float64(349.675455987849), 'y_friction': np.float64(-0.0), 'rolling_resistance': -100} at time 15
+2025-03-19 11:20:33,902 | INFO     | helper_functions.py:50 | Starting data update for rear_left:{'x_friction': np.float64(349.675455987849), 'y_friction': np.float64(-0.0), 'rolling_resistance': -100} at time 15
+2025-03-19 11:20:33,902 | INFO     | helper_functions.py:50 | Starting data update for cnt_grav:{'inertial_z': 0, 'inertial_x': 0, 'inertial_y': 0} at time 15

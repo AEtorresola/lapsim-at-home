@@ -38,6 +38,7 @@ class PhysicalTire:
             self.force_point_parent = False
         # Initialize state dictionary
         self.state = {
+            'steering_angle':0.0,
             'angular_velocity': 0.0,
             'slip_ratio': 0.0,
             'slip_angle': 0.0,
@@ -331,11 +332,12 @@ class PhysicalTire:
         Get the current wheel state.
         
         Returns:
-            Dictionary containing angular velocity
+            Dictionary containing angular velocity, radius, and steering angle<BS
         """
         return {
             'angular_velocity': self.state['angular_velocity'],
-            'radius': self.radius
+            'radius': self.radius,
+            'steering_angle': self.state['steering_angle']
         }
         
     def get_history(self):
@@ -374,4 +376,5 @@ class PhysicalTire:
         
         plt.tight_layout()
         plt.show()
+    
 

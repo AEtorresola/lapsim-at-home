@@ -1,0 +1,57 @@
+
+digraph LapSimFlowchart {
+    rankdir=TB; // Top to bottom layout
+    node [shape=box, style=rounded, fontname="Helvetica", fontsize=10];
+    edge [fontname="Helvetica", fontsize=9];
+
+    // Start Nodes
+    start [label="Input:\nTrack Geometry &\nVehicle Parameters", shape=folder, style=filled, fillcolor=lightgrey];
+    precalc [label="Pre-Calculation:\nMax Velocity Profile V_max(s)\n(Grip/Track Limited)"];
+    init [label="Initialize State @ Start"];
+
+    // Loop Start (Conceptual)
+    loop_start [label="Start Loop\n(For each track segment 'ds')", shape=ellipse, style=dashed];
+
+    // Main Loop Steps
+    target_lat [label="1. Target Path →\nRequired Lateral Force/Yaw Moment\n(F_y,req, M_z,req)"];
+    target_alpha [label="2. Determine Target\nFront Slip Angle (α_f,target)\n(Driver Model)"];
+    calc_fx_avail [label="3. Calculate Available\nLongitudinal Grip (F_x,avail)\n(Combined Slip Limit)"];
+    decision_v [label="4. Compare V vs V_max(s)", shape=diamond];
+    accelerate [label="Accelerate\n(F_x,target ≤ F_x,avail,\nPowertrain Limit)"];
+    decelerate [label="Decelerate\n(F_x,target = Braking Force)"];
+    calc_controls [label="5. Calculate Required Controls:\nSteer Angle (δ_req),\nSlip Ratio (κ_target)"];
+    apply_forces [label="6. Apply Actual Forces/Torques\n(Tire & Powertrain Limits)"];
+    update_state [label="7. Integrate EoM →\nUpdate State"];
+
+    // End Node
+    output [label="Output:\nLap Time,\nState Trajectories,\nControl Inputs", shape=note, style=filled, fillcolor=lightgrey];
+
+    // Edges (Flow Definition)
+    start -> precalc;
+    precalc -> init;
+    init -> loop_start;
+    loop_start -> target_lat [style=dashed]; // Dashed into the loop
+
+    target_lat -> target_alpha;
+    target_alpha -> calc_fx_avail;
+    calc_fx_avail -> decision_v;
+
+    decision_v -> accelerate [label=" V < V_max "];
+    decision_v -> decelerate [label=" V > V_max "];
+    // Implicitly, if V == V_max, it might follow either path with Fx_target near zero, often handled within accelerate logic.
+
+    accelerate -> calc_controls;
+    decelerate -> calc_controls;
+
+    calc_controls -> apply_forces;
+    apply_forces -> update_state;
+
+    // Loop Back Edge
+    update_state -> target_lat [label="Next 'ds'", constraint=true]; // Explicit loop back
+
+    // Conceptual Loop Exit to Output (might not be explicitly reached in code this way)
+    // This edge shows the final result after all segments 'ds' are processed.
+    update_state -> output [style=dashed, constraint=false, label=" Lap End "];
+
+
+}
