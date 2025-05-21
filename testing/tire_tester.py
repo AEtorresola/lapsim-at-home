@@ -198,6 +198,10 @@ if __name__ == "__main__":
             {'label': 'Cornering + Brake', 'Fz': 500, 'alpha_deg': -3, 'kappa': -0.06, 'gamma_deg': -1},
         ]
 
+        target_fy, fz, gamma, long_intensity= 0,600,0,1 
+        long_mode = 'accelerate'
+        slips = tire.find_slips_prioritizing_fy(target_fy, fz, gamma, long_mode, long_intensity)
+        import pdb; pdb.set_trace()
         # --- Run Test Suites ---
         fy_priority_results_df = run_fy_priority_test_suite(tire, fy_priority_test_conditions)
         pure_fx_results_df = run_pure_fx_inverse_test_suite(tire, pure_fx_test_conditions)

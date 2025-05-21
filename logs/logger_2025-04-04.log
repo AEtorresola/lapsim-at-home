@@ -1,0 +1,182 @@
+2025-04-04 09:01:27,254 | INFO     | v3_magic_formula.py:33 | Initializing Pacejka Tire Model from hoosier_r20.par
+2025-04-04 09:01:27,254 | INFO     | v3_magic_formula.py:55 | Loading parameters from: hoosier_r20.par
+2025-04-04 09:01:27,254 | INFO     | v3_magic_formula.py:66 | Finished loading parameters from hoosier_r20.par
+2025-04-04 09:01:27,254 | DEBUG    | v3_magic_formula.py:71 | Validating required parameters...
+2025-04-04 09:01:27,254 | INFO     | v3_magic_formula.py:93 | All required parameters loaded successfully.
+2025-04-04 09:01:27,259 | INFO     | v3_magic_formula.py:51 | Pacejka Tire Model initialized successfully.
+2025-04-04 09:01:27,259 | INFO     | v3_magic_formula.py:585 | Finding slips for target Fy=0.00 N, Fz=600.0, gamma=0.00 deg, mode='accelerate', intensity=1.00
+2025-04-04 09:01:27,259 | DEBUG    | v3_magic_formula.py:493 | Finding alpha for target Fy=0.00 N at Fz=600.0, gamma=0.00 deg
+2025-04-04 09:01:27,259 | INFO     | v3_magic_formula.py:568 | Found alpha=0.033 deg for target Fy=0.00 (brentq).
+2025-04-04 09:01:27,259 | DEBUG    | v3_magic_formula.py:591 | Step 1: Required alpha (approx) = 0.033 deg
+2025-04-04 09:01:27,259 | DEBUG    | v3_magic_formula.py:336 | Calculating peak Fx potential for Fz=600, gamma=0
+2025-04-04 09:01:27,259 | DEBUG    | v3_magic_formula.py:348 | Peak Fx potential: Dx=1652.79, SVx=-20.52, Peak=1632.27
+2025-04-04 09:01:27,260 | DEBUG    | v3_magic_formula.py:354 | Calculating min Fx potential for Fz=600, gamma=0
+2025-04-04 09:01:27,260 | DEBUG    | v3_magic_formula.py:366 | Min Fx potential: Dx=1652.79, SVx=-20.52, Min=-1673.31
+2025-04-04 09:01:27,260 | DEBUG    | v3_magic_formula.py:604 | Step 2: Approx Gxa(alpha_req, k=0) = 1.0000
+2025-04-04 09:01:31,124 | DEBUG    | v3_magic_formula.py:614 | Step 3: Target Accel Fx = 1632.23 N (AvailMax=1632.23)
+2025-04-04 09:01:32,636 | DEBUG    | v3_magic_formula.py:375 | Starting: target_fx=1632.2315, Fz=600.0, gamma=0.00 deg
+2025-04-04 09:01:32,636 | DEBUG    | v3_magic_formula.py:380 | Clamped inputs: Fz_proc=600.0, gamma_proc=0.0000 rad
+2025-04-04 09:01:32,636 | DEBUG    | v3_magic_formula.py:393 | Components: dfz=-0.1004, mu_x=2.7546, K_x_k=53986.84, S_Hx=-0.0013, S_Vx=-20.52, D_x=1652.79, C_x=1.2579, E_x_base=0.5167
+2025-04-04 09:01:32,636 | DEBUG    | v3_magic_formula.py:399 | Achievable Fx range: [-1673.3082, 1632.2715]
+2025-04-04 09:01:40,135 | DEBUG    | v3_magic_formula.py:458 | Target Fx not near extremum. Using root-finder.
+2025-04-04 09:01:40,136 | DEBUG    | v3_magic_formula.py:464 | Root finding bracket: [-0.2750, 0.2750]
+2025-04-04 09:01:40,136 | DEBUG    | v3_magic_formula.py:468 | Errors at boundaries: f(-0.2750)=-3295.2589, f(0.2750)=-9.8158
+2025-04-04 09:01:40,136 | WARNING  | v3_magic_formula.py:478 | Kappa bracketing failed. Trying ridder.
+2025-04-04 09:01:40,136 | WARNING  | v3_magic_formula.py:483 | Ridder method also failed for kappa: f(a) and f(b) must have different signs
+2025-04-04 09:01:40,136 | WARNING  | v3_magic_formula.py:626 | Could not find kappa for target Fx=1632.23. Setting kappa_req = 0.
+2025-04-04 09:01:40,136 | INFO     | v3_magic_formula.py:629 | Result: alpha=0.033 deg, kappa=0.0000
+2025-04-04 09:02:02,091 | INFO     | v3_magic_formula.py:33 | Initializing Pacejka Tire Model from hoosier_r20.par
+2025-04-04 09:02:02,092 | INFO     | v3_magic_formula.py:55 | Loading parameters from: hoosier_r20.par
+2025-04-04 09:02:02,092 | INFO     | v3_magic_formula.py:66 | Finished loading parameters from hoosier_r20.par
+2025-04-04 09:02:02,092 | DEBUG    | v3_magic_formula.py:71 | Validating required parameters...
+2025-04-04 09:02:02,092 | INFO     | v3_magic_formula.py:93 | All required parameters loaded successfully.
+2025-04-04 09:02:02,097 | INFO     | v3_magic_formula.py:51 | Pacejka Tire Model initialized successfully.
+2025-04-04 09:02:02,097 | INFO     | v3_magic_formula.py:586 | Finding slips for target Fy=0.00 N, Fz=600.0, gamma=0.00 deg, mode='accelerate', intensity=1.00
+2025-04-04 09:02:02,097 | DEBUG    | v3_magic_formula.py:494 | Finding alpha for target Fy=0.00 N at Fz=600.0, gamma=0.00 deg
+2025-04-04 09:02:02,097 | INFO     | v3_magic_formula.py:569 | Found alpha=0.033 deg for target Fy=0.00 (brentq).
+2025-04-04 09:02:02,097 | DEBUG    | v3_magic_formula.py:592 | Step 1: Required alpha (approx) = 0.033 deg
+2025-04-04 09:02:02,097 | DEBUG    | v3_magic_formula.py:336 | Calculating peak Fx potential for Fz=600, gamma=0
+2025-04-04 09:02:02,097 | DEBUG    | v3_magic_formula.py:348 | Peak Fx potential: Dx=1652.79, SVx=-20.52, Peak=1632.27
+2025-04-04 09:02:02,097 | DEBUG    | v3_magic_formula.py:354 | Calculating min Fx potential for Fz=600, gamma=0
+2025-04-04 09:02:02,097 | DEBUG    | v3_magic_formula.py:366 | Min Fx potential: Dx=1652.79, SVx=-20.52, Min=-1673.31
+2025-04-04 09:02:02,097 | DEBUG    | v3_magic_formula.py:605 | Step 2: Approx Gxa(alpha_req, k=0) = 1.0000
+2025-04-04 09:02:03,637 | DEBUG    | v3_magic_formula.py:615 | Step 3: Target Accel Fx = 1632.23 N (AvailMax=1632.23)
+2025-04-04 09:02:04,843 | DEBUG    | v3_magic_formula.py:375 | Starting: target_fx=1632.2315, Fz=600.0, gamma=0.00 deg
+2025-04-04 09:02:04,843 | DEBUG    | v3_magic_formula.py:380 | Clamped inputs: Fz_proc=600.0, gamma_proc=0.0000 rad
+2025-04-04 09:02:04,843 | DEBUG    | v3_magic_formula.py:393 | Components: dfz=-0.1004, mu_x=2.7546, K_x_k=53986.84, S_Hx=-0.0013, S_Vx=-20.52, D_x=1652.79, C_x=1.2579, E_x_base=0.5167
+2025-04-04 09:02:04,843 | DEBUG    | v3_magic_formula.py:399 | Achievable Fx range: [-1673.3082, 1632.2715]
+2025-04-04 09:02:07,136 | DEBUG    | v3_magic_formula.py:459 | Target Fx not near extremum. Using root-finder.
+2025-04-04 09:02:07,136 | DEBUG    | v3_magic_formula.py:465 | Root finding bracket: [-0.2750, 0.2750]
+2025-04-04 09:02:07,136 | DEBUG    | v3_magic_formula.py:469 | Errors at boundaries: f(-0.2750)=-3295.2589, f(0.2750)=-9.8158
+2025-04-04 09:02:07,136 | WARNING  | v3_magic_formula.py:479 | Kappa bracketing failed. Trying ridder.
+2025-04-04 09:02:07,137 | WARNING  | v3_magic_formula.py:484 | Ridder method also failed for kappa: f(a) and f(b) must have different signs
+2025-04-04 09:02:07,137 | WARNING  | v3_magic_formula.py:627 | Could not find kappa for target Fx=1632.23. Setting kappa_req = 0.
+2025-04-04 09:02:07,137 | INFO     | v3_magic_formula.py:630 | Result: alpha=0.033 deg, kappa=0.0000
+2025-04-04 09:03:14,976 | ERROR    | v3_magic_formula.py:633 | Error in find_slips_prioritizing_fy: 
+2025-04-04 09:03:17,557 | INFO     | v3_magic_formula.py:33 | Initializing Pacejka Tire Model from hoosier_r20.par
+2025-04-04 09:03:17,557 | INFO     | v3_magic_formula.py:55 | Loading parameters from: hoosier_r20.par
+2025-04-04 09:03:17,557 | INFO     | v3_magic_formula.py:66 | Finished loading parameters from hoosier_r20.par
+2025-04-04 09:03:17,557 | DEBUG    | v3_magic_formula.py:71 | Validating required parameters...
+2025-04-04 09:03:17,558 | INFO     | v3_magic_formula.py:93 | All required parameters loaded successfully.
+2025-04-04 09:03:17,562 | INFO     | v3_magic_formula.py:51 | Pacejka Tire Model initialized successfully.
+2025-04-04 09:03:17,563 | INFO     | v3_magic_formula.py:582 | Finding slips for target Fy=0.00 N, Fz=600.0, gamma=0.00 deg, mode='accelerate', intensity=1.00
+2025-04-04 09:03:17,563 | DEBUG    | v3_magic_formula.py:490 | Finding alpha for target Fy=0.00 N at Fz=600.0, gamma=0.00 deg
+2025-04-04 09:03:17,563 | INFO     | v3_magic_formula.py:565 | Found alpha=0.033 deg for target Fy=0.00 (brentq).
+2025-04-04 09:03:17,563 | DEBUG    | v3_magic_formula.py:588 | Step 1: Required alpha (approx) = 0.033 deg
+2025-04-04 09:03:17,563 | DEBUG    | v3_magic_formula.py:336 | Calculating peak Fx potential for Fz=600, gamma=0
+2025-04-04 09:03:17,563 | DEBUG    | v3_magic_formula.py:348 | Peak Fx potential: Dx=1652.79, SVx=-20.52, Peak=1632.27
+2025-04-04 09:03:17,563 | DEBUG    | v3_magic_formula.py:354 | Calculating min Fx potential for Fz=600, gamma=0
+2025-04-04 09:03:17,563 | DEBUG    | v3_magic_formula.py:366 | Min Fx potential: Dx=1652.79, SVx=-20.52, Min=-1673.31
+2025-04-04 09:03:17,563 | DEBUG    | v3_magic_formula.py:601 | Step 2: Approx Gxa(alpha_req, k=0) = 1.0000
+2025-04-04 09:03:19,388 | DEBUG    | v3_magic_formula.py:611 | Step 3: Target Accel Fx = 1632.23 N (AvailMax=1632.23)
+2025-04-04 09:03:22,379 | DEBUG    | v3_magic_formula.py:375 | Starting: target_fx=1632.2315, Fz=600.0, gamma=0.00 deg
+2025-04-04 09:03:22,379 | DEBUG    | v3_magic_formula.py:380 | Clamped inputs: Fz_proc=600.0, gamma_proc=0.0000 rad
+2025-04-04 09:03:22,380 | DEBUG    | v3_magic_formula.py:393 | Components: dfz=-0.1004, mu_x=2.7546, K_x_k=53986.84, S_Hx=-0.0013, S_Vx=-20.52, D_x=1652.79, C_x=1.2579, E_x_base=0.5167
+2025-04-04 09:03:22,380 | DEBUG    | v3_magic_formula.py:399 | Achievable Fx range: [-1673.3082, 1632.2715]
+2025-04-04 09:03:22,380 | DEBUG    | v3_magic_formula.py:455 | Target Fx not near extremum. Using root-finder.
+2025-04-04 09:03:22,380 | DEBUG    | v3_magic_formula.py:461 | Root finding bracket: [-0.2750, 0.2750]
+2025-04-04 09:03:22,380 | DEBUG    | v3_magic_formula.py:465 | Errors at boundaries: f(-0.2750)=-3295.2589, f(0.2750)=-9.8158
+2025-04-04 09:03:22,380 | WARNING  | v3_magic_formula.py:475 | Kappa bracketing failed. Trying ridder.
+2025-04-04 09:03:22,380 | WARNING  | v3_magic_formula.py:480 | Ridder method also failed for kappa: f(a) and f(b) must have different signs
+2025-04-04 09:03:22,380 | WARNING  | v3_magic_formula.py:623 | Could not find kappa for target Fx=1632.23. Setting kappa_req = 0.
+2025-04-04 09:03:22,380 | INFO     | v3_magic_formula.py:626 | Result: alpha=0.033 deg, kappa=0.0000
+2025-04-04 09:04:37,702 | INFO     | v3_magic_formula.py:33 | Initializing Pacejka Tire Model from hoosier_r20.par
+2025-04-04 09:04:37,702 | INFO     | v3_magic_formula.py:55 | Loading parameters from: hoosier_r20.par
+2025-04-04 09:04:37,702 | INFO     | v3_magic_formula.py:66 | Finished loading parameters from hoosier_r20.par
+2025-04-04 09:04:37,702 | DEBUG    | v3_magic_formula.py:71 | Validating required parameters...
+2025-04-04 09:04:37,702 | INFO     | v3_magic_formula.py:93 | All required parameters loaded successfully.
+2025-04-04 09:04:37,707 | INFO     | v3_magic_formula.py:51 | Pacejka Tire Model initialized successfully.
+2025-04-04 09:04:37,707 | INFO     | v3_magic_formula.py:584 | Finding slips for target Fy=0.00 N, Fz=600.0, gamma=0.00 deg, mode='accelerate', intensity=1.00
+2025-04-04 09:04:37,707 | DEBUG    | v3_magic_formula.py:492 | Finding alpha for target Fy=0.00 N at Fz=600.0, gamma=0.00 deg
+2025-04-04 09:04:37,707 | INFO     | v3_magic_formula.py:567 | Found alpha=0.033 deg for target Fy=0.00 (brentq).
+2025-04-04 09:04:37,707 | DEBUG    | v3_magic_formula.py:590 | Step 1: Required alpha (approx) = 0.033 deg
+2025-04-04 09:04:37,707 | DEBUG    | v3_magic_formula.py:336 | Calculating peak Fx potential for Fz=600, gamma=0
+2025-04-04 09:04:37,708 | DEBUG    | v3_magic_formula.py:348 | Peak Fx potential: Dx=1652.79, SVx=-20.52, Peak=1632.27
+2025-04-04 09:04:37,708 | DEBUG    | v3_magic_formula.py:354 | Calculating min Fx potential for Fz=600, gamma=0
+2025-04-04 09:04:37,708 | DEBUG    | v3_magic_formula.py:366 | Min Fx potential: Dx=1652.79, SVx=-20.52, Min=-1673.31
+2025-04-04 09:04:37,708 | DEBUG    | v3_magic_formula.py:603 | Step 2: Approx Gxa(alpha_req, k=0) = 1.0000
+2025-04-04 09:04:38,242 | DEBUG    | v3_magic_formula.py:613 | Step 3: Target Accel Fx = 1632.23 N (AvailMax=1632.23)
+2025-04-04 09:04:39,263 | DEBUG    | v3_magic_formula.py:375 | Starting: target_fx=1632.2315, Fz=600.0, gamma=0.00 deg
+2025-04-04 09:04:39,263 | DEBUG    | v3_magic_formula.py:380 | Clamped inputs: Fz_proc=600.0, gamma_proc=0.0000 rad
+2025-04-04 09:04:39,263 | DEBUG    | v3_magic_formula.py:393 | Components: dfz=-0.1004, mu_x=2.7546, K_x_k=53986.84, S_Hx=-0.0013, S_Vx=-20.52, D_x=1652.79, C_x=1.2579, E_x_base=0.5167
+2025-04-04 09:04:39,263 | DEBUG    | v3_magic_formula.py:399 | Achievable Fx range: [-1673.3082, 1632.2715]
+2025-04-04 09:04:39,263 | DEBUG    | v3_magic_formula.py:455 | Target Fx not near extremum. Using root-finder.
+2025-04-04 09:04:39,263 | DEBUG    | v3_magic_formula.py:461 | Root finding bracket: [-0.2750, 0.2750]
+2025-04-04 09:04:39,263 | DEBUG    | v3_magic_formula.py:465 | Errors at boundaries: f(-0.2750)=-3295.2589, f(0.2750)=-9.8158
+2025-04-04 09:04:46,088 | WARNING  | v3_magic_formula.py:476 | Kappa bracketing failed. Trying ridder.
+2025-04-04 09:08:55,337 | ERROR    | v3_magic_formula.py:631 | Error in find_slips_prioritizing_fy: 
+2025-04-04 09:08:57,079 | INFO     | v3_magic_formula.py:33 | Initializing Pacejka Tire Model from hoosier_r20.par
+2025-04-04 09:08:57,079 | INFO     | v3_magic_formula.py:55 | Loading parameters from: hoosier_r20.par
+2025-04-04 09:08:57,079 | INFO     | v3_magic_formula.py:66 | Finished loading parameters from hoosier_r20.par
+2025-04-04 09:08:57,080 | DEBUG    | v3_magic_formula.py:71 | Validating required parameters...
+2025-04-04 09:08:57,080 | INFO     | v3_magic_formula.py:93 | All required parameters loaded successfully.
+2025-04-04 09:08:57,085 | INFO     | v3_magic_formula.py:51 | Pacejka Tire Model initialized successfully.
+2025-04-04 09:08:57,085 | INFO     | v3_magic_formula.py:584 | Finding slips for target Fy=0.00 N, Fz=600.0, gamma=0.00 deg, mode='accelerate', intensity=1.00
+2025-04-04 09:08:57,085 | DEBUG    | v3_magic_formula.py:492 | Finding alpha for target Fy=0.00 N at Fz=600.0, gamma=0.00 deg
+2025-04-04 09:08:57,085 | INFO     | v3_magic_formula.py:567 | Found alpha=0.033 deg for target Fy=0.00 (brentq).
+2025-04-04 09:08:57,085 | DEBUG    | v3_magic_formula.py:590 | Step 1: Required alpha (approx) = 0.033 deg
+2025-04-04 09:08:57,085 | DEBUG    | v3_magic_formula.py:336 | Calculating peak Fx potential for Fz=600, gamma=0
+2025-04-04 09:08:57,085 | DEBUG    | v3_magic_formula.py:348 | Peak Fx potential: Dx=1652.79, SVx=-20.52, Peak=1632.27
+2025-04-04 09:08:57,085 | DEBUG    | v3_magic_formula.py:354 | Calculating min Fx potential for Fz=600, gamma=0
+2025-04-04 09:08:57,085 | DEBUG    | v3_magic_formula.py:366 | Min Fx potential: Dx=1652.79, SVx=-20.52, Min=-1673.31
+2025-04-04 09:08:57,085 | DEBUG    | v3_magic_formula.py:603 | Step 2: Approx Gxa(alpha_req, k=0) = 1.0000
+2025-04-04 09:08:58,881 | DEBUG    | v3_magic_formula.py:613 | Step 3: Target Accel Fx = 1632.23 N (AvailMax=1632.23)
+2025-04-04 09:08:59,803 | DEBUG    | v3_magic_formula.py:375 | Starting: target_fx=1632.2315, Fz=600.0, gamma=0.00 deg
+2025-04-04 09:08:59,803 | DEBUG    | v3_magic_formula.py:380 | Clamped inputs: Fz_proc=600.0, gamma_proc=0.0000 rad
+2025-04-04 09:08:59,803 | DEBUG    | v3_magic_formula.py:393 | Components: dfz=-0.1004, mu_x=2.7546, K_x_k=53986.84, S_Hx=-0.0013, S_Vx=-20.52, D_x=1652.79, C_x=1.2579, E_x_base=0.5167
+2025-04-04 09:08:59,803 | DEBUG    | v3_magic_formula.py:399 | Achievable Fx range: [-1673.3082, 1632.2715]
+2025-04-04 09:08:59,803 | DEBUG    | v3_magic_formula.py:455 | Target Fx not near extremum. Using root-finder.
+2025-04-04 09:08:59,803 | DEBUG    | v3_magic_formula.py:461 | Root finding bracket: [-0.2750, 0.2750]
+2025-04-04 09:08:59,803 | DEBUG    | v3_magic_formula.py:465 | Errors at boundaries: f(-0.2750)=-3295.2589, f(0.2750)=-9.8158
+2025-04-04 09:12:04,685 | INFO     | v3_magic_formula.py:33 | Initializing Pacejka Tire Model from hoosier_r20.par
+2025-04-04 09:12:04,686 | INFO     | v3_magic_formula.py:55 | Loading parameters from: hoosier_r20.par
+2025-04-04 09:12:04,686 | INFO     | v3_magic_formula.py:66 | Finished loading parameters from hoosier_r20.par
+2025-04-04 09:12:04,686 | DEBUG    | v3_magic_formula.py:71 | Validating required parameters...
+2025-04-04 09:12:04,686 | INFO     | v3_magic_formula.py:93 | All required parameters loaded successfully.
+2025-04-04 09:12:04,691 | INFO     | v3_magic_formula.py:51 | Pacejka Tire Model initialized successfully.
+2025-04-04 09:12:04,691 | INFO     | v3_magic_formula.py:577 | Finding slips for target Fy=0.00 N, Fz=600.0, gamma=0.00 deg, mode='accelerate', intensity=1.00
+2025-04-04 09:12:04,691 | DEBUG    | v3_magic_formula.py:485 | Finding alpha for target Fy=0.00 N at Fz=600.0, gamma=0.00 deg
+2025-04-04 09:12:04,691 | INFO     | v3_magic_formula.py:560 | Found alpha=0.033 deg for target Fy=0.00 (brentq).
+2025-04-04 09:12:04,691 | DEBUG    | v3_magic_formula.py:583 | Step 1: Required alpha (approx) = 0.033 deg
+2025-04-04 09:12:04,691 | DEBUG    | v3_magic_formula.py:336 | Calculating peak Fx potential for Fz=600, gamma=0
+2025-04-04 09:12:04,691 | DEBUG    | v3_magic_formula.py:348 | Peak Fx potential: Dx=1652.79, SVx=-20.52, Peak=1632.27
+2025-04-04 09:12:04,691 | DEBUG    | v3_magic_formula.py:354 | Calculating min Fx potential for Fz=600, gamma=0
+2025-04-04 09:12:04,691 | DEBUG    | v3_magic_formula.py:366 | Min Fx potential: Dx=1652.79, SVx=-20.52, Min=-1673.31
+2025-04-04 09:12:04,691 | DEBUG    | v3_magic_formula.py:595 | Step 2: Approx Gxa(alpha_req, k=0) = 1.0000
+2025-04-04 09:12:04,691 | DEBUG    | v3_magic_formula.py:604 | Step 3: Target Accel Fx = 1632.23 N (AvailMax=1632.23)
+2025-04-04 09:12:04,692 | DEBUG    | v3_magic_formula.py:375 | Starting: target_fx=1632.2315, Fz=600.0, gamma=0.00 deg
+2025-04-04 09:12:04,692 | DEBUG    | v3_magic_formula.py:380 | Clamped inputs: Fz_proc=600.0, gamma_proc=0.0000 rad
+2025-04-04 09:12:04,692 | DEBUG    | v3_magic_formula.py:393 | Components: dfz=-0.1004, mu_x=2.7546, K_x_k=53986.84, S_Hx=-0.0013, S_Vx=-20.52, D_x=1652.79, C_x=1.2579, E_x_base=0.5167
+2025-04-04 09:12:04,692 | DEBUG    | v3_magic_formula.py:399 | Achievable Fx range: [-1673.3082, 1632.2715]
+2025-04-04 09:12:04,692 | DEBUG    | v3_magic_formula.py:451 | Target Fx not near extremum. Using root-finder.
+2025-04-04 09:12:04,692 | DEBUG    | v3_magic_formula.py:457 | Root finding bracket: [-0.2750, 0.2750]
+2025-04-04 09:12:04,692 | DEBUG    | v3_magic_formula.py:461 | Errors at boundaries: f(-0.2750)=-3295.2589, f(0.2750)=-9.8158
+2025-04-04 09:12:04,692 | WARNING  | v3_magic_formula.py:471 | Kappa bracketing failed. Trying ridder.
+2025-04-04 09:12:04,692 | WARNING  | v3_magic_formula.py:476 | Ridder method also failed for kappa: f(a) and f(b) must have different signs
+2025-04-04 09:12:04,692 | WARNING  | v3_magic_formula.py:615 | Could not find kappa for target Fx=1632.23. Setting kappa_req = 0.
+2025-04-04 09:12:04,692 | INFO     | v3_magic_formula.py:618 | Result: alpha=0.033 deg, kappa=0.0000
+2025-04-04 09:15:42,069 | INFO     | v3_magic_formula.py:33 | Initializing Pacejka Tire Model from hoosier_r20.par
+2025-04-04 09:15:42,069 | INFO     | v3_magic_formula.py:55 | Loading parameters from: hoosier_r20.par
+2025-04-04 09:15:42,069 | INFO     | v3_magic_formula.py:66 | Finished loading parameters from hoosier_r20.par
+2025-04-04 09:15:42,069 | DEBUG    | v3_magic_formula.py:71 | Validating required parameters...
+2025-04-04 09:15:42,069 | INFO     | v3_magic_formula.py:93 | All required parameters loaded successfully.
+2025-04-04 09:15:42,074 | INFO     | v3_magic_formula.py:51 | Pacejka Tire Model initialized successfully.
+2025-04-04 09:15:42,075 | INFO     | v3_magic_formula.py:584 | Finding slips for target Fy=0.00 N, Fz=600.0, gamma=0.00 deg, mode='accelerate', intensity=1.00
+2025-04-04 09:15:42,075 | DEBUG    | v3_magic_formula.py:492 | Finding alpha for target Fy=0.00 N at Fz=600.0, gamma=0.00 deg
+2025-04-04 09:15:42,075 | INFO     | v3_magic_formula.py:567 | Found alpha=0.033 deg for target Fy=0.00 (brentq).
+2025-04-04 09:15:42,075 | DEBUG    | v3_magic_formula.py:590 | Step 1: Required alpha (approx) = 0.033 deg
+2025-04-04 09:15:42,075 | DEBUG    | v3_magic_formula.py:336 | Calculating peak Fx potential for Fz=600, gamma=0
+2025-04-04 09:15:42,075 | DEBUG    | v3_magic_formula.py:348 | Peak Fx potential: Dx=1652.79, SVx=-20.52, Peak=1632.27
+2025-04-04 09:15:42,075 | DEBUG    | v3_magic_formula.py:354 | Calculating min Fx potential for Fz=600, gamma=0
+2025-04-04 09:15:42,075 | DEBUG    | v3_magic_formula.py:366 | Min Fx potential: Dx=1652.79, SVx=-20.52, Min=-1673.31
+2025-04-04 09:15:42,075 | DEBUG    | v3_magic_formula.py:603 | Step 2: Approx Gxa(alpha_req, k=0) = 1.0000
+2025-04-04 09:15:43,869 | DEBUG    | v3_magic_formula.py:613 | Step 3: Target Accel Fx = 1632.23 N (AvailMax=1632.23)
+2025-04-04 09:15:44,787 | DEBUG    | v3_magic_formula.py:375 | Starting: target_fx=1632.2315, Fz=600.0, gamma=0.00 deg
+2025-04-04 09:15:44,787 | DEBUG    | v3_magic_formula.py:380 | Clamped inputs: Fz_proc=600.0, gamma_proc=0.0000 rad
+2025-04-04 09:15:44,787 | DEBUG    | v3_magic_formula.py:393 | Components: dfz=-0.1004, mu_x=2.7546, K_x_k=53986.84, S_Hx=-0.0013, S_Vx=-20.52, D_x=1652.79, C_x=1.2579, E_x_base=0.5167
+2025-04-04 09:15:44,787 | DEBUG    | v3_magic_formula.py:399 | Achievable Fx range: [-1673.3082, 1632.2715]
+2025-04-04 09:15:44,787 | DEBUG    | v3_magic_formula.py:455 | Target Fx not near extremum. Using root-finder.
+2025-04-04 09:15:44,787 | DEBUG    | v3_magic_formula.py:461 | Root finding bracket: [-0.2750, 0.2750]
+2025-04-04 09:15:44,787 | DEBUG    | v3_magic_formula.py:465 | Errors at boundaries: f(-0.2750)=-3295.2589, f(0.2750)=-9.8158
+2025-04-04 09:25:02,472 | ERROR    | v3_magic_formula.py:631 | Error in find_slips_prioritizing_fy: name 'pbd' is not defined
+2025-04-04 09:25:02,477 | ERROR    | v3_magic_formula.py:631 | Error in find_slips_prioritizing_fy: name 'pbd' is not defined

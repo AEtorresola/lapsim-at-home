@@ -1,0 +1,564 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SES_TireAnalyzer
+</name>
+</assembly>
+<members>
+<member name="T:SES_TireAnalyzer.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:SES_TireAnalyzer.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:SES_TireAnalyzer.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:SES_TireAnalyzer.My.Resources.Resources.Generic_Black_Stackpole130">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:SES_TireAnalyzer.My.Resources.Resources.settings">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:SES_TireAnalyzer.My.Resources.Resources.Tire_Grip">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:SES_TireAnalyzer.My.Resources.Resources.Tire_Grip_Red">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="M:SES_TireAnalyzer.TA_Tire.#ctor(System.String@,SES_Tire_Model.Tire_Model_Types@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@)">
+ <summary>
+ TA_Tire holds extra members of SES_Tire and is called with coefficients and multipliers
+ </summary>
+ <param name="SES_LicenseKey">license authorization string passed to TireModel New()</param>
+ <param name="Model_Type">Tire_Model_Types.SES_V50E or Tire_Model_Types.PAC_2002</param>
+ <param name="FX_Coeff">longitudinal coefficients</param>
+ <param name="FX_Mult">longitudinal scaling coefficients</param>
+ <param name="FY_Coeff">lateral coefficients</param>
+ <param name="FY_Mult">lateral scaling coefficients</param>
+ <param name="MX_Coeff">overturning coefficients</param>
+ <param name="MX_Mult">overturning scaling coefficients</param>
+ <param name="MZ_Coeff">aligning coefficients</param>
+ <param name="MZ_Mult">aligning scaling coefficients</param>
+ <param name="LR_Coeff">loaded radius coefficients</param>
+ <param name="LR_Mult">loaded radius scaling coefficients</param>
+ <param name="FZ_Coeff">vertical load coefficients</param>
+ <param name="RR_Coeff">rolling radius coefficients</param>
+ <param name="RR_Mult">rolling radius coefficients</param>
+ <param name="ER_Coeff">effective radius coefficients</param>
+ <remarks></remarks>
+</member>
+<member name="M:SES_TireAnalyzer.TA_Tire.#ctor(SES_TireAnalyzer.TA_Tire@)">
+ <summary>
+ Copy Constructor copies all members of an instance of the class
+ </summary>
+ <param name="Tire_Copy">instance of TA_Tire to clone (copy)</param>
+ <remarks></remarks>
+</member>
+<member name="M:SES_TireAnalyzer.TA_Tire.#ctor(SES_Tire_Loader.TireModel@)">
+ <summary>
+ Copy Constructor copies all members of an instance of the class
+ </summary>
+ <param name="FromTireModel">instance of TireModel to clone (copy)</param>
+ <remarks></remarks>
+</member>
+<member name="M:SES_TireAnalyzer.TA_Tire.Zero_Coeff_Errs">
+ <summary>
+ Creates string showing blank coefficient arrays
+ </summary>
+ <returns>Returns list of coefficient arrays with blank coefficients or "" if none, </returns>
+ <remarks></remarks>
+</member>
+<member name="M:SES_TireAnalyzer.TireModeGraphProperties.OverrideScheme">
+ <summary>
+ Gives each tire it's own color on the graph
+ </summary>
+ <remarks>AWY 20101019</remarks>
+</member>
+<member name="T:SES_TireAnalyzer.VistaButtons.VistaButton">
+ <summary>
+ A replacement for the Windows Button Control.
+ </summary>
+</member>
+<member name="M:SES_TireAnalyzer.VistaButtons.VistaButton.#ctor">
+ <summary>
+ Initialize the component with it's
+ default settings.
+ </summary>
+</member>
+<member name="M:SES_TireAnalyzer.VistaButtons.VistaButton.Dispose(System.Boolean)">
+ <summary>
+ Release resources used by the control.
+ </summary>
+</member>
+<member name="T:SES_TireAnalyzer.VistaButtons.VistaButton.State">
+ <summary>
+ A private enumeration that determines
+ the mouse state in relation to the
+ current instance of the control.
+ </summary>
+</member>
+<member name="T:SES_TireAnalyzer.VistaButtons.VistaButton.Style">
+ <summary>
+ A public enumeration that determines whether
+ the button background is painted when the
+ mouse is not inside the ClientArea.
+ </summary>
+</member>
+<member name="F:SES_TireAnalyzer.VistaButtons.VistaButton.Style.Default">
+ <summary>
+ Draw the button as normal
+ </summary>
+</member>
+<member name="F:SES_TireAnalyzer.VistaButtons.VistaButton.Style.Flat">
+ <summary>
+ Only draw the background on mouse over.
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.VistaButtons.VistaButton.ButtonText">
+ <summary>
+ The text that is displayed on the button.
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.VistaButtons.VistaButton.ForeColor">
+ <summary>
+ The color with which the text is drawn.
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.VistaButtons.VistaButton.TextAlign">
+ <summary>
+ The alignment of the button text
+ that is displayed on the control.
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.VistaButtons.VistaButton.CornerRadius">
+ <summary>
+ The radius for the button corners. The
+ greater this value is, the more 'smooth'
+ the corners are. This property should
+  not be greater than half of the
+  controls height.
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.VistaButtons.VistaButton.HighlightColor">
+ <summary>
+ The colour of the highlight on the top of the button.
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.VistaButtons.VistaButton.ButtonColor">
+ <summary>
+ The bottom color of the button that
+ will be drawn over the base color.
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.VistaButtons.VistaButton.GlowColor">
+ <summary>
+ The colour that the button glows when
+ the mouse is inside the client area.
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.VistaButtons.VistaButton.BackImage">
+ <summary>
+ The background image for the button,
+ this image is drawn over the base
+ color of the button.
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.VistaButtons.VistaButton.BaseColor">
+ <summary>
+ The backing color that the rest of
+ the button is drawn. For a glassier
+ effect set this property to Transparent.
+ </summary>
+</member>
+<member name="M:SES_TireAnalyzer.VistaButtons.VistaButton.DrawOuterStroke(System.Drawing.Graphics)">
+ <summary>
+ Draws the outer border for the control
+ using the ButtonColor property.
+ </summary>
+ <param name="g">The graphics object used in the paint event.</param>
+</member>
+<member name="M:SES_TireAnalyzer.VistaButtons.VistaButton.DrawInnerStroke(System.Drawing.Graphics)">
+ <summary>
+ Draws the inner border for the control
+ using the HighlightColor property.
+ </summary>
+ <param name="g">The graphics object used in the paint event.</param>
+</member>
+<member name="M:SES_TireAnalyzer.VistaButtons.VistaButton.DrawBackground(System.Drawing.Graphics)">
+ <summary>
+ Draws the background for the control
+ using the background image and the
+ BaseColor.
+ </summary>
+ <param name="g">The graphics object used in the paint event.</param>
+</member>
+<member name="M:SES_TireAnalyzer.VistaButtons.VistaButton.DrawHighlight(System.Drawing.Graphics)">
+ <summary>
+ Draws the Highlight over the top of the
+ control using the HightlightColor.
+ </summary>
+ <param name="g">The graphics object used in the paint event.</param>
+</member>
+<member name="M:SES_TireAnalyzer.VistaButtons.VistaButton.DrawGlow(System.Drawing.Graphics)">
+ <summary>
+ Draws the glow for the button when the
+ mouse is inside the client area using
+ the GlowColor property.
+ </summary>
+ <param name="g">The graphics object used in the paint event.</param>
+</member>
+<member name="M:SES_TireAnalyzer.VistaButtons.VistaButton.DrawText(System.Drawing.Graphics)">
+ <summary>
+ Draws the text for the button.
+ </summary>
+ <param name="g">The graphics object used in the paint event.</param>
+</member>
+<member name="M:SES_TireAnalyzer.VistaButtons.VistaButton.DrawImage(System.Drawing.Graphics)">
+ <summary>
+ Draws the image for the button
+ </summary>
+ <param name="g">The graphics object used in the paint event.</param>
+</member>
+<member name="T:SES_TireAnalyzer.Renderers.GraphicsTools">
+ <summary>
+ Provides tools for graphics processing
+ </summary>
+ <remarks>
+ 2007 José Manuel Menéndez Poo
+ Visit my blog for upgrades and other renderers - www.menendezpoo.com
+ </remarks>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.GraphicsTools.CreateRoundRectangle(System.Drawing.Rectangle,System.Int32)">
+ <summary>
+ Creates a rounded rectangle from the specified rectangle and radius
+ </summary>
+ <param name="rectangle">Base rectangle</param>
+ <param name="radius">Radius of the corners</param>
+ <returns>Rounded rectangle as a GraphicsPath</returns>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.GraphicsTools.CreateTopRoundRectangle(System.Drawing.Rectangle,System.Int32)">
+ <summary>
+ Creates a rectangle rounded on the top
+ </summary>
+ <param name="rectangle">Base rectangle</param>
+ <param name="radius">Radius of the top corners</param>
+ <returns>Rounded rectangle (on top) as a GraphicsPath object</returns>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.GraphicsTools.CreateBottomRoundRectangle(System.Drawing.Rectangle,System.Int32)">
+ <summary>
+ Creates a rectangle rounded on the bottom
+ </summary>
+ <param name="rectangle">Base rectangle</param>
+ <param name="radius">Radius of the bottom corners</param>
+ <returns>Rounded rectangle (on bottom) as a GraphicsPath object</returns>
+</member>
+<member name="T:SES_TireAnalyzer.Renderers.WindowsVistaColorTable">
+ <summary>
+ Provides colors used by WindowsVista style rendering
+ </summary>
+ <remarks>
+ 2007 José Manuel Menéndez Poo
+ Visit my blog for upgrades and other renderers - www.menendezpoo.com
+ </remarks>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.DropDownArrow">
+ <summary>
+ Gets or sets the color for the dropwown arrow
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.ButtonFillSouthPressed">
+ <summary>
+ Gets or sets the south color of the button fill when pressed
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.ButtonFillSouth">
+ <summary>
+ Gets or sets the south color of the button fill
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.ButtonInnerBorderPressed">
+ <summary>
+ Gets or sets the color of the inner border when pressed
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.Glow">
+ <summary>
+ Gets or sets the glow color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.ButtonFillNorth">
+ <summary>
+ Gets or sets the buttons fill color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.ButtonFillNorthPressed">
+ <summary>
+ Gets or sets the buttons fill color when pressed
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.ButtonInnerBorder">
+ <summary>
+ Gets or sets the buttons inner border color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.ButtonBorder">
+ <summary>
+ Gets or sets the buttons border color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.ButtonOuterBorder">
+ <summary>
+ Gets or sets the buttons outer border color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.Text">
+ <summary>
+ Gets or sets the color of the text
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.BackgroundGlow">
+ <summary>
+ Gets or sets the background glow color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.BackgroundBorder">
+ <summary>
+ Gets or sets the color of the background border
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.BackgroundNorth">
+ <summary>
+ Background north part
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.BackgroundSouth">
+ <summary>
+ Background south color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.GlossyEffectNorth">
+ <summary>
+ Gets ors sets the glossy effect north color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTable.GlossyEffectSouth">
+ <summary>
+ Gets or sets the glossy effect south color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.DropDownArrow">
+ <summary>
+ Gets or sets the color for the dropwown arrow
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.ButtonFillSouthPressed">
+ <summary>
+ Gets or sets the south color of the button fill when pressed
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.ButtonFillSouth">
+ <summary>
+ Gets or sets the south color of the button fill
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.ButtonInnerBorderPressed">
+ <summary>
+ Gets or sets the color of the inner border when pressed
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.Glow">
+ <summary>
+ Gets or sets the glow color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.ButtonFillNorth">
+ <summary>
+ Gets or sets the buttons fill color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.ButtonFillNorthPressed">
+ <summary>
+ Gets or sets the buttons fill color when pressed
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.ButtonInnerBorder">
+ <summary>
+ Gets or sets the buttons inner border color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.ButtonBorder">
+ <summary>
+ Gets or sets the buttons border color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.ButtonOuterBorder">
+ <summary>
+ Gets or sets the buttons outer border color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.Text">
+ <summary>
+ Gets or sets the color of the text
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.BackgroundGlow">
+ <summary>
+ Gets or sets the background glow color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.BackgroundBorder">
+ <summary>
+ Gets or sets the color of the background border
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.BackgroundNorth">
+ <summary>
+ Background north part
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.BackgroundSouth">
+ <summary>
+ Background south color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.GlossyEffectNorth">
+ <summary>
+ Gets ors sets the glossy effect north color
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaColorTableLight.GlossyEffectSouth">
+ <summary>
+ Gets or sets the glossy effect south color
+ </summary>
+</member>
+<member name="T:SES_TireAnalyzer.Renderers.WindowsVistaRenderer">
+ <summary>
+ Renders toolstrip items using Windows Vista look and feel
+ </summary>
+ <remarks>
+ 2007 José Manuel Menéndez Poo
+ Visit my blog for upgrades and other renderers - www.menendezpoo.com
+ </remarks>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.CreateBottomRadialPath(System.Drawing.Rectangle)">
+ <summary>
+ Creates the glow of the buttons
+ </summary>
+ <param name="rectangle"></param>
+ <returns></returns>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.CreateOverflowChevron(System.Drawing.Size)">
+ <summary>
+ Creates the chevron for the overflow button
+ </summary>
+ <param name="overflowButtonSize"></param>
+ <returns></returns>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.ButtonRadius">
+ <summary>
+ Gets or sets the buttons rectangle radius
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.ToolStripRadius">
+ <summary>
+ Gets or sets the radius of the rectangle of the hole ToolStrip
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.BackgroundGlow">
+ <summary>
+ Gets ors sets if background glow should be rendered
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.GlossyEffect">
+ <summary>
+ Gets or sets if glossy effect should be rendered
+ </summary>
+</member>
+<member name="P:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.ColorTable">
+ <summary>
+ Gets or sets the color table of the renderer
+ </summary>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.InitializeToolStripMenuItem(System.Windows.Forms.ToolStripMenuItem)">
+ <summary>
+ Initializes properties for ToolStripMenuItem objects
+ </summary>
+ <param name="item"></param>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.GetToolStripRectangle(System.Windows.Forms.ToolStrip)">
+ <summary>
+ Gets a rounded rectangle representing the hole area of the toolstrip
+ </summary>
+ <param name="toolStrip"></param>
+ <returns></returns>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.DrawGlossyEffect(System.Drawing.Graphics,System.Windows.Forms.ToolStrip)">
+ <summary>
+ Draws the glossy effect on the toolbar
+ </summary>
+ <param name="g"></param>
+ <param name="t"></param>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.DrawGlossyEffect(System.Drawing.Graphics,System.Windows.Forms.ToolStrip,System.Int32)">
+ <summary>
+ Draws the glossy effect on the toolbar
+ </summary>
+ <param name="g"></param>
+ <param name="t"></param>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.DrawVistaButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)">
+ <summary>
+ Renders the background of a button
+ </summary>
+ <param name="e"></param>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.DrawVistaMenuItemBackground(System.Drawing.Graphics,System.Drawing.Rectangle,System.Boolean,System.Boolean,System.Boolean)">
+ <summary>
+ Renders the background of a button on the specified rectangle using the specified device
+ </summary>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.DrawVistaButtonBackground(System.Drawing.Graphics,System.Drawing.Rectangle,System.Boolean,System.Boolean,System.Boolean)">
+ <summary>
+ Renders the background of a button on the specified rectangle using the specified device
+ </summary>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.DrawVistaMenuBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)">
+ <summary>
+ Draws the background of a menu, vista style
+ </summary>
+ <param name="e"></param>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.DrawVistaMenuBackground(System.Drawing.Graphics,System.Drawing.Rectangle,System.Boolean,System.Boolean)">
+ <summary>
+ Draws the background of a menu, vista style
+ </summary>
+ <param name="g"></param>
+ <param name="r"></param>
+ <param name="highlighted"></param>
+</member>
+<member name="M:SES_TireAnalyzer.Renderers.WindowsVistaRenderer.DrawVistaMenuBorder(System.Drawing.Graphics,System.Drawing.Rectangle)">
+ <summary>
+ Draws the border of the vista menu window
+ </summary>
+ <param name="g"></param>
+ <param name="r"></param>
+</member>
+</members>
+</doc>

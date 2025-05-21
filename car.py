@@ -54,6 +54,9 @@ class Car:
             self.dist_r = dist_r
             # Physical Parameters
             self.z_inertia = 1/12*self.mass*(self.wheelbase**2+self.track_width**2)
+
+            self.steering_ratio = 1         # Ratio between left and right tire steering 
+            self.max_steering_angle = 35    # Maximum angle (deg) each tire can turn
             # Program Parameters
             self.force_lag = 5          # Milliseconds
             self.timestep = 5           # Milliseconds
@@ -484,7 +487,11 @@ However, for the future this will be expanded to include the more complicated on
         # Ensure the row exists for this timestep, even if forces are zero
         self.cnt_grav.forces.update({'inertial_z':0.0, 'inertial_x':0.0, 'inertial_y':0.0}, time)
 
+    def apply_steering(self,
+                       steer_percent:float # left = negative ; right = positive
 
+                       ):
+        pass
 
 class force_point:
 
@@ -608,5 +615,8 @@ class position:
         self.rear_right = (track_width/2, 0, 0)
         self.rear_left = (-track_width/2, 0, 0)
         self.cog = (dist_r, 0, h_cog)
+
+
+
 
 
